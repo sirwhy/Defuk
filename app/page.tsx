@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useAccount } from 'wagmi';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePrivy } from '@privy-io/react-auth';
 
 const features = [
   {
@@ -82,10 +81,7 @@ export default function Home() {
                   </Link>
                 </>
               ) : (
-                <div className="flex flex-col items-center gap-4">
-                  <ConnectButton />
-                  <p className="text-[rgba(248,250,252,0.4)] text-sm">Connect wallet to get started</p>
-                </div>
+                <PrivyLogin />
               )}
             </div>
 
@@ -150,11 +146,62 @@ export default function Home() {
                 Start Creating
               </Link>
             ) : (
-              <ConnectButton />
+              <PrivyLogin />
             )}
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+// Privy Login Component
+function PrivyLogin() {
+  const { login, logout, user, isAuthenticated, ready } = usePrivy();
+  const walletAddress = user?.wallet?.address;
+  const shortAddress = walletAddress 
+    ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
+    : '';
+
+  if (!ready) {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <div className="w-12 h-12 rounded-full bg-white/[0.08] animate-pulse" />
+        <p className="text-[rgba(248,250,252,0.4)] text-sm">Loading...</p>
+      </div>
+    );
+  }
+
+  if (isAuthenticated) {
+    return (
+      <div className="flex flex-col items-center gap-4">
+        <div className="flex items-center gap-3">
+          <span className="px-4 py-2 rounded-full bg-white/[0.08] text-white font-medium">
+            {shortAddress}
+          </span>
+          <button
+            onClick={logout}
+            className="px-4 py-2 rounded-full border border-white/[0.15] text-[rgba(248,250,252,0.6)] font-medium hover:text-white hover:bg-white/[0.04] transition-all"
+          >
+            Disconnect
+          </button>
+        </div>
+        <Link href="/mint" className="btn btn-primary text-lg px-10 py-4">
+          Start Creating
+        </Link>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <button
+        onClick={login}
+        className="px-8 py-4 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white font-bold text-lg hover:opacity-90 transition-opacity"
+      >
+        Connect Wallet
+      </button>
+      <p className="text-[rgba(248,250,252,0.4)] text-sm">Login with email, phone, or social</p>
     </div>
   );
 }

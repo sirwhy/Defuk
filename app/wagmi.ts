@@ -1,10 +1,10 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { base, baseSepolia } from 'wagmi/chains';
-import { http } from 'viem';
+import { http, createConfig } from 'viem';
 
-export const wagmiConfig = getDefaultConfig({
-  appName: 'NFTCreate Marketplace',
-  projectId: 'YOUR_PROJECT_ID',
+// Wagmi config for Privy (defined in providers.tsx)
+// This file just keeps the contracts and ABIs
+
+export const wagmiConfig = createConfig({
   chains: [base, baseSepolia],
   transports: {
     [base.id]: http(),
