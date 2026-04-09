@@ -33,7 +33,7 @@ const stats = [
 ];
 
 export default function Home() {
-  const { isConnected } = useAccount();
+  const { user, authenticated } = usePrivy();
 
   return (
     <div className="min-h-screen">
