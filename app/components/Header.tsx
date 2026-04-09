@@ -16,7 +16,7 @@ export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { login, logout, user, isAuthenticated, ready } = usePrivy();
+  const { login, logout, user, authenticated, ready } = usePrivy();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -72,14 +72,14 @@ export default function Header() {
           {/* Connect Button - Privy */}
           <div className="flex items-center gap-4">
             <div className="hidden sm:block">
-              {ready && !isAuthenticated ? (
+              {ready && !authenticated ? (
                 <button
                   onClick={login}
                   className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white font-medium text-sm hover:opacity-90 transition-opacity"
                 >
                   Connect Wallet
                 </button>
-              ) : isAuthenticated ? (
+              ) : authenticated ? (
                 <div className="flex items-center gap-3">
                   <span className="px-3 py-1.5 rounded-full bg-white/[0.08] text-white text-sm font-medium">
                     {shortAddress}
@@ -137,14 +137,14 @@ export default function Header() {
                 </Link>
               ))}
               <div className="pt-2">
-                {ready && !isAuthenticated ? (
+                {ready && !authenticated ? (
                   <button
                     onClick={login}
                     className="w-full px-5 py-2.5 rounded-full bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white font-medium text-sm"
                   >
                     Connect Wallet
                   </button>
-                ) : isAuthenticated ? (
+                ) : authenticated ? (
                   <button
                     onClick={logout}
                     className="w-full px-5 py-2.5 rounded-full border border-white/[0.15] text-white font-medium text-sm"

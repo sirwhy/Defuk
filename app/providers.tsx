@@ -4,7 +4,8 @@ import * as React from 'react';
 import { PrivyProvider } from '@privy-io/react-auth';
 import { PrivyWagmiConnector } from '@privy-io/wagmi-connector';
 import { base, baseSepolia } from 'wagmi/chains';
-import { http, createConfig } from 'viem';
+import { http } from 'viem';
+import { createConfig } from 'wagmi';
 
 const wagmiConfig = createConfig({
   chains: [base, baseSepolia],

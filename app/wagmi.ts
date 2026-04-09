@@ -1,5 +1,5 @@
 import { base, baseSepolia } from 'wagmi/chains';
-import { http, createConfig } from 'viem';
+import { http, createConfig } from 'wagmi';
 
 // Wagmi config for Privy (defined in providers.tsx)
 // This file just keeps the contracts and ABIs

@@ -157,7 +157,7 @@ export default function Home() {
 
 // Privy Login Component
 function PrivyLogin() {
-  const { login, logout, user, isAuthenticated, ready } = usePrivy();
+  const { login, logout, user, authenticated, ready } = usePrivy();
   const walletAddress = user?.wallet?.address;
   const shortAddress = walletAddress 
     ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`
@@ -172,7 +172,7 @@ function PrivyLogin() {
     );
   }
 
-  if (isAuthenticated) {
+  if (authenticated) {
     return (
       <div className="flex flex-col items-center gap-4">
         <div className="flex items-center gap-3">
