@@ -1,17 +1,20 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount, useWriteContract } from 'wagmi';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { CONTRACT_ADDRESSES, NFT_ABI } from '../wagmi';
 
 export default function Mint() {
-  const { isConnected } = useAccount();
+  const { address, isConnected } = useAccount();
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string>('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [isMinting, setIsMinting] = useState(false);
 
   const { writeContract } = useWriteContract();
+  const { data: hash } = useWriteContract();
+  const { isLoading: isConfirming } = useWaitForTransactionReceipt({ hash });
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -21,15 +24,32 @@ export default function Mint() {
     }
   };
 
-  const handleMint = () => {
-    if (!name) return;
+  const handleMint = async () => {
+    if (!name) {
+      alert('Please enter NFT name');
+      return;
+    }
     
-    writeContract({
-      address: CONTRACT_ADDRESSES.nft as `0x${string}`,
-      abi: NFT_ABI,
-      functionName: 'mint',
-      args: [CONTRACT_ADDRESSES.nft, 1n],
-    });
+    if (!address) {
+      alert('Please connect wallet first');
+      return;
+    }
+    
+    setIsMinting(true);
+    
+    try {
+      // Mint NFT to user's wallet
+      writeContract({
+        address: CONTRACT_ADDRESSES.nft as `0x${string}`,
+        abi: NFT_ABI,
+        functionName: 'mint',
+        args: [address as `0x${string}`, 1n],
+      });
+    } catch (error) {
+      console.error('Mint error:', error);
+      alert('Failed to mint NFT. Make sure your wallet is the contract owner.');
+      setIsMinting(false);
+    }
   };
 
   if (!isConnected) {
@@ -50,6 +70,7 @@ export default function Mint() {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Mint Your <span className="gradient-text">NFT</span></h1>
+            <p className="text-[rgba(248,250,252,0.5)] text-sm mt-2">Note: Only owner wallet can mint on Base Sepolia testnet</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -81,9 +102,14 @@ export default function Mint() {
                 <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Describe your NFT..." rows={4} className="w-full resize-none" />
               </div>
 
-              <button onClick={handleMint} disabled={!name} className="w-full btn btn-primary text-lg py-4 disabled:opacity-50">
-                Mint NFT
+              <button 
+                onClick={handleMint} 
+                disabled={!name || !isConnected || isConfirming || isMinting} 
+                className="w-full btn btn-primary text-lg py-4 disabled:opacity-50"
+              >
+                {isConfirming ? 'Confirming...' : isMinting ? 'Minting...' : isConnected ? 'Mint NFT' : 'Connect Wallet First'}
               </button>
+              {!isConnected && <p className="text-xs text-center mt-2 text-gray-400">Connect your wallet to mint NFTs</p>}
             </div>
           </div>
         </div>
