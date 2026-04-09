@@ -17,18 +17,16 @@ export const CONTRACT_ADDRESSES = {
   marketplace: (process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000') as `0x${string}`,
 };
 
-// ABI fragments
+// Simple ABIs
 export const NFT_ABI = [
-  { inputs: [{ name: 'to', type: 'address' }, { name: 'quantity', type: 'uint256' }], name: 'mint', outputs: [], stateMutability: 'nonpayable', type: 'function' },
-  { inputs: [{ name: 'account', type: 'address' }], name: 'balanceOf', outputs: [{ name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' },
-  { inputs: [{ name: 'tokenId', type: 'uint256' }], name: 'ownerOf', outputs: [{ name: '', type: 'address' }], stateMutability: 'view', type: 'function' },
-  { inputs: [], name: 'totalMinted', outputs: [{ name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' },
+  'function mint(address to, uint256 quantity)',
+  'function balanceOf(address account) view returns (uint256)',
+  'function ownerOf(uint256 tokenId) view returns (address)',
 ] as const;
 
 export const MARKETPLACE_ABI = [
-  { inputs: [{ name: 'nftContract', type: 'address' }, { name: 'tokenId', type: 'uint256' }, { name: 'price', type: 'uint256' }], name: 'createListing', outputs: [], stateMutability: 'nonpayable', type: 'function' },
-  { inputs: [{ name: 'listingId', type: 'uint256' }], name: 'buyListing', outputs: [], stateMutability: 'payable', type: 'function' },
-  { inputs: [{ name: 'listingId', type: 'uint256' }], name: 'cancelListing', outputs: [], stateMutability: 'nonpayable', type: 'function' },
-  { inputs: [{ name: 'listingId', type: 'uint256' }], name: 'getListing', outputs: [{ name: 'seller', type: 'address' }, { name: 'nftContract', type: 'address' }, { name: 'tokenId', type: 'uint256' }, { name: 'price', type: 'uint256' }, { name: 'active', type: 'bool' }], stateMutability: 'view', type: 'function' },
-  { inputs: [], name: 'listingIdCounter', outputs: [{ name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' },
+  'function createListing(address nftContract, uint256 tokenId, uint256 price)',
+  'function buyListing(uint256 listingId) payable',
+  'function cancelListing(uint256 listingId)',
+  'function getListing(uint256 listingId) view returns (address seller, address nftContract, uint256 tokenId, uint256 price, bool active)',
 ] as const;
