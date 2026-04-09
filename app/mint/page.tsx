@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
+import { CONTRACT_ADDRESSES, NFT_ABI } from '../wagmi';
 
 export default function Mint() {
   const { isConnected } = useAccount();
@@ -9,6 +10,8 @@ export default function Mint() {
   const [preview, setPreview] = useState<string>('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
+  const { writeContract } = useWriteContract();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -20,7 +23,13 @@ export default function Mint() {
 
   const handleMint = () => {
     if (!name) return;
-    alert('Minting will work after deploying contracts! Add NEXT_PUBLIC_NFT_CONTRACT_ADDRESS to env.');
+    
+    writeContract({
+      address: CONTRACT_ADDRESSES.nft as `0x${string}`,
+      abi: NFT_ABI,
+      functionName: 'mint',
+      args: [CONTRACT_ADDRESSES.nft, 1n],
+    });
   };
 
   if (!isConnected) {
