@@ -45,6 +45,7 @@ export default function Collection() {
     
     setActionLoading(nft.id);
     writeContract({
+      chainId: 8453,
       address: CONTRACT_ADDRESSES.marketplace,
       abi: MARKETPLACE_ABI,
       functionName: 'createListing',
@@ -67,6 +68,7 @@ export default function Collection() {
     
     setActionLoading(nft.id);
     writeContract({
+      chainId: 8453,
       address: CONTRACT_ADDRESSES.marketplace,
       abi: MARKETPLACE_ABI,
       functionName: 'cancelListing',

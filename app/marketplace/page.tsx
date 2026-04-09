@@ -56,6 +56,7 @@ export default function Marketplace() {
     
     setBuyingId(listing.id);
     writeContract({
+      chainId: 8453,
       address: CONTRACT_ADDRESSES.marketplace,
       abi: MARKETPLACE_ABI,
       functionName: 'buyListing',

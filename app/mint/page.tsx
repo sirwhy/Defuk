@@ -52,6 +52,7 @@ export default function Mint() {
       const placeholderURI = `ipfs://placeholder/${Date.now()}`;
       
       writeContract({
+      chainId: 8453,
         address: CONTRACT_ADDRESSES.nft,
         abi: NFT_ABI,
         functionName: 'mint',
