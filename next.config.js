@@ -35,6 +35,9 @@ const nextConfig = {
         _http_incoming: false,
         _http_outgoing: false,
         _http_server: false,
+        // Fallback for missing modules
+        '@react-native-async-storage/async-storage': false,
+        'pino-pretty': false,
       };
     }
     return config;
@@ -42,6 +45,7 @@ const nextConfig = {
   // Ignore errors for missing Node modules
   experimental: {
     serverComponentsExternalPackages: ['@metamask/sdk'],
+    webpackBuildWorker: true,
   },
 };
 
