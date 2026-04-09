@@ -37,12 +37,11 @@ export default function Collection() {
   const handleList = (nft: NFT) => {
     if (!listPrice) return;
     
-    // @ts-ignore - wagmi typing issue
     writeContract({
-      address: CONTRACT_ADDRESSES.marketplace,
+      address: CONTRACT_ADDRESSES.marketplace as `0x${string}`,
       abi: MARKETPLACE_ABI,
       functionName: 'createListing',
-      args: [CONTRACT_ADDRESSES.nft, BigInt(nft.id), BigInt(parseFloat(listPrice) * 1e18)],
+      args: [CONTRACT_ADDRESSES.nft as `0x${string}`, BigInt(nft.id), BigInt(parseFloat(listPrice) * 1e18)],
     });
     
     setListingModal(null);
@@ -50,9 +49,8 @@ export default function Collection() {
   };
 
   const handleDelist = (nft: NFT) => {
-    // @ts-ignore
     writeContract({
-      address: CONTRACT_ADDRESSES.marketplace,
+      address: CONTRACT_ADDRESSES.marketplace as `0x${string}`,
       abi: MARKETPLACE_ABI,
       functionName: 'cancelListing',
       args: [BigInt(nft.id)],
