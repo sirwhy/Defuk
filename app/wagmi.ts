@@ -14,7 +14,7 @@ export const wagmiConfig = getDefaultConfig({
 
 // Deployed on Base Sepolia Testnet (or Mainnet if env vars set)
 export const CONTRACT_ADDRESSES = {
-  nft: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS || '0xf257E51Fec807FbFd2AbEC462CCaa6A234B33F79',
+  nft: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS || '0x2D03F6b9bFc84ee6C7d8cC4313B6833eDB8f6011',
   marketplace: process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS || '0xF22d0FB68f542E681344B0130Bf284c3Fe2ddc7E',
 };
 
@@ -31,7 +31,7 @@ export const NFT_ABI = [
   { "inputs": [{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name": "getApproved", "outputs": [{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function" },
   { "inputs": [{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name": "isApprovedForAll", "outputs": [{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function" },
   { "inputs": [], "name": "maxSupply", "outputs": [{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function" },
-  { "inputs": [{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"quantity","type":"uint256"}],"name": "mint", "outputs": [], "stateMutability":"nonpayable","type":"function" },
+  { "inputs": [{"internalType":"uint256","name":"quantity","type":"uint256"}],"name": "mint", "outputs": [], "stateMutability":"payable","type":"function" },
   { "inputs": [], "name": "name", "outputs": [{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function" },
   { "inputs": [], "name": "owner", "outputs": [{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function" },
   { "inputs": [{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name": "ownerOf", "outputs": [{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function" },

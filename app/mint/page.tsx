@@ -38,16 +38,16 @@ export default function Mint() {
     setIsMinting(true);
     
     try {
-      // Mint NFT to user's wallet
+      // Public mint - free mint (0 ETH)
       writeContract({
         address: CONTRACT_ADDRESSES.nft as `0x${string}`,
         abi: NFT_ABI,
         functionName: 'mint',
-        args: [address as `0x${string}`, 1n],
+        args: [1n],
       });
     } catch (error) {
       console.error('Mint error:', error);
-      alert('Failed to mint NFT. Make sure your wallet is the contract owner.');
+      alert('Failed to mint NFT. Please check your wallet connection.');
       setIsMinting(false);
     }
   };
