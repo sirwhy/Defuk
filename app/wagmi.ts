@@ -12,10 +12,10 @@ export const wagmiConfig = getDefaultConfig({
   },
 });
 
-// Deployed on Base Sepolia Testnet
+// Deployed on Base Sepolia Testnet (or Mainnet if env vars set)
 export const CONTRACT_ADDRESSES = {
-  nft: '0xf257E51Fec807FbFd2AbEC462CCaa6A234B33F79',
-  marketplace: '0xF22d0FB68f542E681344B0130Bf284c3Fe2ddc7E',
+  nft: process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS || '0xf257E51Fec807FbFd2AbEC462CCaa6A234B33F79',
+  marketplace: process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS || '0xF22d0FB68f542E681344B0130Bf284c3Fe2ddc7E',
 };
 
 // Complete ABI - MyNFT (simplified - main functions)
