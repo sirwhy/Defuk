@@ -12,9 +12,10 @@ export const wagmiConfig = getDefaultConfig({
   },
 });
 
+// Deployed on Base Sepolia Testnet
 export const CONTRACT_ADDRESSES = {
-  nft: (process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000') as `0x${string}`,
-  marketplace: (process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000') as `0x${string}`,
+  nft: '0xf257E51Fec807FbFd2AbEC462CCaa6A234B33F79',
+  marketplace: '0xF22d0FB68f542E681344B0130Bf284c3Fe2ddc7E',
 };
 
 // Simple ABIs
@@ -22,11 +23,11 @@ export const NFT_ABI = [
   'function mint(address to, uint256 quantity)',
   'function balanceOf(address account) view returns (uint256)',
   'function ownerOf(uint256 tokenId) view returns (address)',
-] as const;
+];
 
 export const MARKETPLACE_ABI = [
   'function createListing(address nftContract, uint256 tokenId, uint256 price)',
   'function buyListing(uint256 listingId) payable',
   'function cancelListing(uint256 listingId)',
-  'function getListing(uint256 listingId) view returns (address seller, address nftContract, uint256 tokenId, uint256 price, bool active)',
-] as const;
+  'function getListing(uint256 listingId) view returns (address, address, uint256, uint256, bool)',
+];
