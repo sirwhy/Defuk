@@ -62,8 +62,8 @@ export default function LobsterHome() {
       fontFamily: '"Montserrat", sans-serif'
     }}>
       
-      {/* Ocean Waves Background */}
-      <div className="ocean-waves" style={{
+      {/* Ocean Waves Background with pixel style */}
+      <div className="ocean-waves pixel-art" style={{
         position: 'fixed',
         top: 0,
         left: 0,
@@ -74,6 +74,12 @@ export default function LobsterHome() {
           radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
           radial-gradient(circle at 50% 50%, rgba(0, 105, 148, 0.1) 0%, transparent 70%)
         `,
+        backgroundImage: `
+          linear-gradient(45deg, rgba(64, 224, 208, 0.05) 25%, transparent 25%, transparent 75%, rgba(64, 224, 208, 0.05) 75%, rgba(64, 224, 208, 0.05)),
+          linear-gradient(45deg, rgba(64, 224, 208, 0.05) 25%, transparent 25%, transparent 75%, rgba(64, 224, 208, 0.05) 75%, rgba(64, 224, 208, 0.05))
+        `,
+        backgroundSize: '4px 4px',
+        backgroundPosition: '0 0, 2px 2px',
         zIndex: 0
       }} />
 
@@ -484,10 +490,10 @@ export default function LobsterHome() {
         zIndex: 1
       }}>
         <div className="container">
-          <div className="flex justify-center gap-8 mb-8">
-            <LobsterIcon type="bubble" size="md" animation="bubble-up" />
-            <LobsterIcon type="ocean" size="md" animation="wave-slow" />
-            <LobsterIcon type="fresh" size="md" animation="fresh" />
+          <div className="flex justify-center gap-8 mb-8 pixel-art">
+            <LobsterIcon type="bubble" size="md" animation="bubble-up" className="pixel-art" />
+            <LobsterIcon type="ocean" size="md" animation="wave-slow" className="pixel-art" />
+            <LobsterIcon type="fresh" size="md" animation="fresh" className="pixel-art" />
           </div>
           
           <p style={{

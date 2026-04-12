@@ -351,20 +351,201 @@ a {
 }
 
 /* ================================
-   Lobster Theme Utilities
+   Pixel Art Lobster Theme Utilities
    ================================ */
 
-/* Lobster Buttons */
+/* Pixel art styling for all lobster components */
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Pixel Buttons with blocky retro style */
 .lobster-btn {
   font-family: 'Montserrat', sans-serif;
   padding: 16px 32px;
-  border-radius: 12px;
-  border: none;
+  border-radius: 0; /* Pixel-perfect square corners */
+  border: 4px solid;
+  border-color: inherit;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2px;
   position: relative;
-  overflow: hidden;
+  transition: all 0.1s;
+  text-transform: uppercase;
+}
+
+/* Pixel button border effect */
+.lobster-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid;
+  border-color: inherit;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.lobster-btn:active {
+  transform: translate(2px, 2px);
+}
+
+.lobster-btn-primary {
+  background: #ff4500;
+  color: #ffffff;
+  border-color: #cc3700;
+  box-shadow: 4px 4px 0px #cc3700;
+}
+
+.lobster-btn-primary:hover {
+  background: #ff6b35;
+  box-shadow: 6px 6px 0px #cc3700;
+  transform: translate(-2px, -2px);
+}
+
+.lobster-btn-secondary {
+  background: #006994;
+  color: #ffffff;
+  border-color: #005072;
+  box-shadow: 4px 4px 0px #005072;
+}
+
+.lobster-btn-secondary:hover {
+  background: #40e0d0;
+  box-shadow: 6px 6px 0px #005072;
+  transform: translate(-2px, -2px);
+}
+
+.lobster-btn-premium {
+  background: #ffd700;
+  color: #0a1929;
+  border-color: #d4af37;
+  box-shadow: 4px 4px 0px #d4af37;
+}
+
+.lobster-btn-premium:hover {
+  background: #ffe033;
+  box-shadow: 6px 6px 0px #d4af37;
+  transform: translate(-2px, -2px);
+}
+
+.lobster-nav-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  padding: 10px 20px;
+  background: rgba(64, 224, 208, 0.2);
+  border: 3px solid var(--ocean-teal);
+  color: var(--ocean-teal);
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 0;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.lobster-nav-btn:hover {
+  background: var(--ocean-teal);
+  color: var(--ocean-deep);
+  box-shadow: 3px 3px 0px var(--ocean-blue);
+  transform: translate(-1px, -1px);
+}
+
+.lobster-cta-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  padding: 14px 28px;
+  background: #ff4500;
+  border: 4px solid transparent;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 0;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 4px 4px 0px #cc3700;
+}
+
+.lobster-cta-btn:hover {
+  background: #ff6b35;
+  box-shadow: 6px 6px 0px #cc3700;
+  border-color: #ffd700;
+  transform: translate(-2px, -2px);
+}
+
+/* Pixel Cards with 3D effect */
+.lobster-card {
+  background: rgba(26, 74, 110, 0.6);
+  border: 4px solid var(--ocean-teal);
+  padding: 32px;
+  border-radius: 0;
+  position: relative;
+  transition: all 0.1s;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
+}
+
+.lobster-card::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid;
+  border-color: var(--ocean-teal);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.lobster-card:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.4), 
+              0 0 30px rgba(64, 224, 208, 0.4);
+  border-color: var(--lobster-orange);
+}
+
+/* Ocean Stats with pixel borders */
+.ocean-stat {
+  text-align: center;
+  padding: 24px 32px;
+  background: rgba(64, 224, 208, 0.15);
+  border-radius: 0;
+  border: 4px solid var(--ocean-teal);
+  box-shadow: 4px 4px 0px var(--ocean-blue);
+  position: relative;
+}
+
+.ocean-stat::before {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid var(--ocean-teal);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.8;
 }
 
 .lobster-btn::before {

@@ -11,9 +11,8 @@ interface LobsterIconProps {
 }
 
 /**
- * Lobster Icon Component
- * Ocean-inspired animated icons
- * Inspired by Higgsfield.ai & MotionSite.ai
+ * Pixel Lobster Icon Component
+ * All 8 icons in pixel art style (32x32 grid)
  */
 export default function LobsterIcon({
   type,
@@ -79,7 +78,7 @@ export default function LobsterIcon({
   );
 }
 
-// Lobster SVG generator
+// Pixel Lobster SVG generator (32x32 grid)
 function getLobsterSVG(type: string, frame: number) {
   const baseClasses = 'w-full h-full';
   
@@ -95,262 +94,245 @@ function getLobsterSVG(type: string, frame: number) {
   switch (type) {
     case 'lobster':
       return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Main body - rounded organic shape */}
-          <path 
-            d="M50 15 C60 10, 70 20, 75 35 C80 50, 75 70, 65 85 C60 92, 40 92, 35 85 C25 70, 20 50, 25 35 C30 20, 40 10, 50 15 Z" 
-            fill={`url(#lobster-gradient-${type})`}
-          />
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Eyes - black pixel squares */}
+          <rect x="8" y="6" width="4" height="4" fill="#000000" />
+          <rect x="20" y="6" width="4" height="4" fill="#000000" />
           
-          {/* Gradient definition */}
-          <defs>
-            <linearGradient id={`lobster-gradient-${type}`} x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: lobsterRed, stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: lobsterOrange, stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#ff2a00', stopOpacity: 1}} />
-            </linearGradient>
-          </defs>
+          {/* Eye highlights - white pixels */}
+          <rect x="9" y="7" width="2" height="2" fill="#ffffff" opacity="0.8" />
+          <rect x="21" y="7" width="2" height="2" fill="#ffffff" opacity="0.8" />
           
-          {/* Eyes */}
-          <circle cx="40" cy="25" r="4" fill="#000000" />
-          <circle cx="60" cy="25" r="4" fill="#000000" />
-          <circle cx="41" cy="24" r="1.5" fill="#ffffff" opacity="0.8" />
-          <circle cx="61" cy="24" r="1.5" fill="#ffffff" opacity="0.8" />
+          {/* Antennae - diagonal pixel lines */}
+          <rect x="7" y="5" width="2" height="2" fill="#000000" />
+          <rect x="8" y="4" width="2" height="2" fill="#000000" />
+          <rect x="22" y="5" width="2" height="2" fill="#000000" />
+          <rect x="24" y="4" width="2" height="2" fill="#000000" />
           
-          {/* Antennae - animate with frame */}
-          <path 
-            d="M40 18 Q30 8, 25 5" 
-            stroke="#000000" 
-            strokeWidth="2" 
-            fill="none"
-            style={{ transform: `translateY(${Math.sin(frame * 0.1) * 2}px)` }}
-          />
-          <path 
-            d="M60 18 Q70 8, 75 5" 
-            stroke="#000000" 
-            strokeWidth="2" 
-            fill="none"
-            style={{ transform: `translateY(${Math.cos(frame * 0.1) * 2}px)` }}
-          />
+          {/* Head - main orange block */}
+          <rect x="10" y="8" width="12" height="8" fill={lobsterRed} />
           
-          {/* Claws - big and prominent */}
-          <ellipse cx="25" cy="55" rx="8" ry="12" fill={clawPink} />
-          <ellipse cx="75" cy="55" rx="8" ry="12" fill={clawPink} />
-          <circle cx="25" cy="55" r="5" fill="#ffb6c1" opacity="0.6" />
-          <circle cx="75" cy="55" r="5" fill="#ffb6c1" opacity="0.6" />
+          {/* Head highlight - lighter orange pixels */}
+          <rect x="12" y="9" width="4" height="4" fill={lobsterOrange} />
           
-          {/* Tail fins */}
-          <path 
-            d="M35 88 L25 98 L35 95" 
-            fill={lobsterOrange}
-            style={{ transform: `rotate(${Math.sin(frame * 0.15) * 10}deg)`, transformOrigin: '35px 88px' }}
-          />
-          <path 
-            d="M65 88 L75 98 L65 95" 
-            fill={lobsterOrange}
-            style={{ transform: `rotate(${Math.cos(frame * 0.15) * 10}deg)`, transformOrigin: '65px 88px' }}
-          />
-          <path 
-            d="M50 88 L50 98 L55 95 L45 95 Z" 
-            fill={lobsterOrange}
-          />
+          {/* Body - red gradient blocks */}
+          <rect x="8" y="16" width="16" height="8" fill={lobsterRed} />
+          <rect x="10" y="20" width="12" height="6" fill={lobsterOrange} />
           
-          {/* Shell texture - subtle stripes */}
-          <path d="M35 30 Q50 35, 65 30" stroke="#cc3700" strokeWidth="1" fill="none" opacity="0.5" />
-          <path d="M35 45 Q50 50, 65 45" stroke="#cc3700" strokeWidth="1" fill="none" opacity="0.5" />
-          <path d="M35 60 Q50 65, 65 60" stroke="#cc3700" strokeWidth="1" fill="none" opacity="0.5" />
+          {/* Body stripes - darker red pixels */}
+          <rect x="8" y="18" width="16" height="1" fill="#cc3700" opacity="0.5" />
+          <rect x="8" y="22" width="16" height="1" fill="#cc3700" opacity="0.5" />
+          
+          {/* Left claw - pink square block */}
+          <rect x="2" y="18" width="6" height="8" fill={clawPink} />
+          <rect x="3" y="19" width="4" height="6" fill="#ffb6c1" opacity="0.6" />
+          
+          {/* Right claw - pink square block */}
+          <rect x="24" y="18" width="6" height="8" fill={clawPink} />
+          <rect x="25" y="19" width="4" height="6" fill="#ffb6c1" opacity="0.6" />
+          
+          {/* Legs - small pixel lines */}
+          <rect x="6" y="20" width="2" height="3" fill="#cc3700" />
+          <rect x="9" y="23" width="2" height="3" fill="#cc3700" />
+          <rect x="21" y="23" width="2" height="3" fill="#cc3700" />
+          <rect x="24" y="20" width="2" height="3" fill="#cc3700" />
+          
+          {/* Tail - orange blocks */}
+          <rect x="12" y="28" width="8" height="2" fill={lobsterOrange} />
+          <rect x="4" y="27" width="4" height="4" fill={lobsterOrange} 
+                 style={{ transform: `rotate(${Math.sin(frame * 0.15) * 15}deg)`, transformOrigin: '6px 28px' }} />
+          <rect x="24" y="27" width="4" height="4" fill={lobsterOrange} 
+                 style={{ transform: `rotate(${Math.cos(frame * 0.15) * 15}deg)`, transformOrigin: '26px 28px' }} />
+          <rect x="14" y="29" width="4" height="2" fill={lobsterOrange} />
         </svg>
       );
 
     case 'claw':
       return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Big lobster claw */}
-          <ellipse cx="50" cy="60" rx="25" ry="20" fill={clawPink} />
-          <ellipse cx="50" cy="60" rx="15" ry="12" fill="#ffb6c1" opacity="0.7" />
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Big pixel lobster claw */}
           
-          {/* Claw fingers */}
-          <path d="M35 45 L25 35 L30 40 Z" fill={clawPink} />
-          <path d="M65 45 L75 35 L70 40 Z" fill={clawPink} />
+          {/* Main claw body - large pink square */}
+          <rect x="8" y="12" width="16" height="12" fill={clawPink} />
           
-          {/* Claw opening animation */}
-          <path 
-            d="M35 45 Q20 30, 25 35" 
-            stroke={lobsterRed} 
-            strokeWidth="3" 
-            fill="none"
-            style={{ transform: `rotate(${Math.sin(frame * 0.1) * 15}deg)`, transformOrigin: '35px 45px' }}
-          />
-          <path 
-            d="M65 45 Q80 30, 75 35" 
-            stroke={lobsterRed} 
-            strokeWidth="3" 
-            fill="none"
-            style={{ transform: `rotate(${Math.cos(frame * 0.1) * 15}deg)`, transformOrigin: '65px 45px' }}
-          />
+          {/* Claw highlight - lighter pink pixels */}
+          <rect x="10" y="14" width="10" height="8" fill="#ffb6c1" opacity="0.7" />
           
-          {/* Highlight */}
-          <ellipse cx="45" cy="55" rx="8" ry="5" fill="#ffffff" opacity="0.4" />
-        </svg>
-      );
-
-    case 'bubble':
-      return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Multiple bubbles rising */}
-          {[0, 15, 30, 45, 60].map((offset, i) => (
-            <circle
-              key={i}
-              cx="50"
-              cy={50 + offset + (frame % 60) * 0.3}
-              r={8 - i}
-              fill={foamWhite}
-              opacity={0.3 - i * 0.05}
-              stroke={oceanLight}
-              strokeWidth="1"
-            />
-          ))}
+          {/* Top - curved pixel pattern */}
+          <rect x="8" y="10" width="16" height="4" fill={clawPink} />
           
-          {/* Large bubble highlight */}
-          <circle cx="50" cy={50 + (frame % 60) * 0.3} r="6" fill="#ffffff" opacity="0.6" />
-        </svg>
-      );
-
-    case 'ocean':
-      return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Ocean waves */}
-          <path 
-            d="M0 50 Q25 30, 50 50 T100 50" 
-            stroke={oceanBlue} 
-            strokeWidth="8" 
-            fill="none"
-            opacity="0.3"
-          />
-          <path 
-            d="M0 60 Q25 40, 50 60 T100 60" 
-            stroke={oceanLight} 
-            strokeWidth="6" 
-            fill="none"
-            opacity="0.5"
-          />
+          {/* Claws - two pixel blocks opening/closing */}
+          <rect x="6" y="8" width="4" height="6" fill={clawPink}
+                style={{ transform: `rotate(${Math.sin(frame * 0.1) * 20}deg)`, transformOrigin: '8px 12px' }} />
+          <rect x="22" y="8" width="4" height="6" fill={clawPink}
+                style={{ transform: `rotate(${Math.cos(frame * 0.1) * 20}deg)`, transformOrigin: '24px 12px' }} />
           
-          {/* Foam */}
-          {[20, 50, 80].map((x, i) => (
-            <circle
-              key={i}
-              cx={x + (frame % 60) * 0.2}
-              cy="50"
-              r="3"
-              fill={foamWhite}
-              opacity="0.8"
-            />
-          ))}
-        </svg>
-      );
-
-    case 'fresh':
-      return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Fresh seafood icon */}
-          <circle cx="50" cy="50" r="40" fill="none" stroke={oceanLight} strokeWidth="3" />
+          {/* Inner detail - darker pixels */}
+          <rect x="12" y="16" width="8" height="6" fill={lobsterRed} opacity="0.3" />
           
-          {/* Leaf/fresh mark */}
-          <path 
-            d="M50 30 Q60 40, 50 50 Q40 60, 50 70" 
-            stroke={oceanBlue} 
-            strokeWidth="4" 
-            fill="none"
-          />
-          <ellipse cx="50" cy="40" rx="8" ry="15" fill="none" stroke={oceanBlue} strokeWidth="2" />
-          
-          {/* Sparkles */}
-          {[0, 90, 180, 270].map((deg, i) => (
-            <circle
-              key={i}
-              cx={50 + Math.cos((deg + frame * 2) * 0.017) * 30}
-              cy={50 + Math.sin((deg + frame * 2) * 0.017) * 30}
-              r="2"
-              fill={shellGold}
-              opacity="0.8"
-            />
-          ))}
-        </svg>
-      );
-
-    case 'premium':
-      return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Premium crown */}
-          <path 
-            d="M20 80 L25 50 L50 65 L75 50 L80 80 Z" 
-            fill={shellGold}
-            stroke="#d4af37"
-            strokeWidth="2"
-          />
-          
-          {/* Gems */}
-          <circle cx="25" cy="50" r="4" fill="#ff0066" opacity="0.8" />
-          <circle cx="50" cy="45" r="5" fill="#0066ff" opacity="0.8" />
-          <circle cx="75" cy="50" r="4" fill="#ff0066" opacity="0.8" />
-          
-          {/* Shine */}
-          <circle cx="50" cy="50" r="3" fill="#ffffff" opacity="0.9" />
+          {/* Highlight pixels */}
+          <rect x="9" y="13" width="4" height="4" fill="#ffffff" opacity="0.4" />
         </svg>
       );
 
     case 'crayfish':
       return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Smaller crayfish */}
-          <ellipse cx="50" cy="60" rx="30" ry="15" fill="#cc3700" />
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Smaller pixel crayfish */}
           
-          {/* Head */}
-          <circle cx="50" cy="45" r="12" fill="#ff4500" />
+          {/* Eyes - black pixels */}
+          <rect x="10" y="8" width="3" height="3" fill="#000000" />
+          <rect x="19" y="8" width="3" height="3" fill="#000000" />
           
-          {/* Antennae */}
-          <path d="M45 40 L40 30 L42 35 Z" fill="#000000" />
-          <path d="M55 40 L60 30 L58 35 Z" fill="#000000" />
+          {/* Head - small orange block */}
+          <rect x="12" y="10" width="8" height="5" fill="#ff4500" />
           
-          {/* Legs - subtle */}
-          {[35, 42, 58, 65].map((x, i) => (
-            <line
-              key={i}
-              x1={x}
-              y1="60"
-              x2={x + (i % 2 === 0 ? -5 : 5)}
-              y2="70"
-              stroke="#cc3700"
-              strokeWidth="2"
-            />
-          ))}
+          {/* Antennae - tiny pixel lines */}
+          <rect x="10" y="8" width="2" height="2" fill="#000000" />
+          <rect x="20" y="8" width="2" height="2" fill="#000000" />
+          
+          {/* Body - red blocks */}
+          <rect x="8" y="15" width="16" height="6" fill="#cc3700" />
+          <rect x="10" y="19" width="12" height="5" fill="#ff4500" />
+          
+          {/* Legs - tiny pixels */}
+          <rect x="6" y="18" width="2" height="2" fill="#cc3700" />
+          <rect x="9" y="20" width="2" height="2" fill="#cc3700" />
+          <rect x="21" y="20" width="2" height="2" fill="#cc3700" />
+          <rect x="24" y="18" width="2" height="2" fill="#cc3700" />
+        </svg>
+      );
+
+    case 'bubble':
+      return (
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Multiple pixel bubbles rising */}
+          
+          {/* Small bubble */}
+          <rect x="10" y="22" width="4" height="4" fill={foamWhite} opacity="0.3" />
+          
+          {/* Medium bubble */}
+          <rect x="14" y="16" width="6" height="6" fill={foamWhite} opacity="0.5" stroke={oceanLight} strokeWidth="1" />
+          
+          {/* Large bubble with highlight */}
+          <rect x="16" y="10" width="8" height="8" fill={foamWhite} opacity="0.7" stroke={oceanLight} strokeWidth="1" />
+          <rect x="18" y="12" width="4" height="4" fill="#ffffff" opacity="0.6" />
+          
+          {/* Tiny bubble */}
+          <rect x="6" y="18" width="3" height="3" fill={foamWhite} opacity="0.25" />
+          
+          {/* Extra tiny bubble */}
+          <rect x="22" y="20" width="2" height="2" fill={foamWhite} opacity="0.2" />
+          
+          {/* Rising animation - multiple bubbles at different heights */}
+          <rect x="12" y={18 + (frame % 60) * 0.25} width="5" height="5" fill={foamWhite} opacity="0.4" />
+          <rect x="18" y={8 + (frame % 60) * 0.25} width="7" height="7" fill={foamWhite} opacity="0.6" />
+        </svg>
+      );
+
+    case 'ocean':
+      return (
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Pixel ocean waves - horizontal lines */}
+          
+          {/* Top wave line - darker blue */}
+          <rect x="0" y="12" width="32" height="4" fill={oceanBlue} opacity="0.3" />
+          <rect x="0" y="13" width="32" height="2" fill={oceanLight} opacity="0.5" />
+          
+          {/* Bottom wave - lighter */}
+          <rect x="0" y="18" width="32" height="4" fill={oceanBlue} opacity="0.4" />
+          <rect x="0" y="19" width="32" height="2" fill={oceanLight} opacity="0.6" />
+          
+          {/* Wave peaks - pixel pattern */}
+          <rect x="4" y="10" width="2" height="3" fill={oceanBlue} opacity="0.3" />
+          <rect x="12" y="8" width="2" height="4" fill={oceanBlue} opacity="0.3" />
+          <rect x="20" y="10" width="2" height="3" fill={oceanBlue} opacity="0.3" />
+          <rect x="28" y="8" width="2" height="4" fill={oceanBlue} opacity="0.3" />
+          
+          {/* Foam bubbles */}
+          <rect x={8 + (frame % 60) * 0.15} y="12" width="2" height="2" fill={foamWhite} opacity="0.8" />
+          <rect x={16 + (frame % 60) * 0.15} y="12" width="2" height="2" fill={foamWhite} opacity="0.8" />
+          <rect x={24 + (frame % 60) * 0.15} y="12" width="2" height="2" fill={foamWhite} opacity="0.8" />
+        </svg>
+      );
+
+    case 'fresh':
+      return (
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Fresh seafood pixel icon */}
+          
+          {/* Circle border - pixel approximation */}
+          <rect x="4" y="4" width="24" height="24" fill="none" stroke={oceanLight} strokeWidth="2" />
+          <rect x="6" y="6" width="20" height="20" fill="none" stroke={oceanBlue} strokeWidth="1" />
+          
+          {/* Fresh leaf/check mark - diagonal pixels */}
+          <rect x="14" y="10" width="4" height="10" fill={oceanBlue} />
+          <rect x="12" y="16" width="4" height="4" fill={oceanBlue} />
+          <rect x="16" y="16" width="4" height="4" fill={oceanBlue} />
+          
+          {/* Sparkles - small white pixel clusters */}
+          <rect x={6 + Math.sin((frame + 0) * 0.1) * 12} y={6 + Math.cos((frame + 0) * 0.1) * 12} width="2" height="2" fill={shellGold} opacity="0.8" />
+          <rect x={6 + Math.sin((frame + 90) * 0.1) * 12} y={6 + Math.cos((frame + 90) * 0.1) * 12} width="2" height="2" fill={shellGold} opacity="0.8" />
+          <rect x={6 + Math.sin((frame + 180) * 0.1) * 12} y={6 + Math.cos((frame + 180) * 0.1) * 12} width="2" height="2" fill={shellGold} opacity="0.8" />
+          <rect x={6 + Math.sin((frame + 270) * 0.1) * 12} y={6 + Math.cos((frame + 270) * 0.1) * 12} width="2" height="2" fill={shellGold} opacity="0.8" />
+          
+          {/* Center dot */}
+          <rect x="15" y="14" width="2" height="2" fill={oceanBlue} />
+        </svg>
+      );
+
+    case 'premium':
+      return (
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Premium gold crown - pixel style */}
+          
+          {/* Crown base */}
+          <rect x="4" y="20" width="24" height="4" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          
+          {/* Crown spikes - triangular pixel pattern */}
+          <rect x="6" y="14" width="4" height="8" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          <rect x="10" y="10" width="4" height="12" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          <rect x="14" y="8" width="4" height="14" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          <rect x="18" y="10" width="4" height="12" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          <rect x="22" y="14" width="4" height="8" fill={shellGold} stroke="#d4af37" strokeWidth="1" />
+          
+          {/* Gems - colored squares */}
+          <rect x="6" y="14" width="2" height="2" fill="#ff0066" opacity="0.8" />
+          <rect x="14" y="8" width="4" height="4" fill="#0066ff" opacity="0.8" />
+          <rect x="24" y="14" width="2" height="2" fill="#ff0066" opacity="0.8" />
+          
+          {/* Shine - white pixel */}
+          <rect x="15" y="10" width="2" height="2" fill="#ffffff" opacity="0.9" />
         </svg>
       );
 
     case 'shell':
       return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          {/* Sea shell */}
-          <path 
-            d="M50 85 C30 85, 20 60, 20 50 C20 30, 35 15, 50 15 C65 15, 80 30, 80 50 C80 60, 70 85, 50 85 Z" 
-            fill={foamWhite}
-            stroke={oceanBlue}
-            strokeWidth="2"
-          />
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          {/* Pixel sea shell - rounded shape approximation */}
           
-          {/* Shell spiral */}
-          <ellipse cx="50" cy="55" rx="15" ry="20" fill="none" stroke={oceanLight} strokeWidth="2" />
-          <path d="M50 50 Q60 40, 50 30 Q40 40, 50 50" fill="none" stroke={oceanLight} strokeWidth="1" />
+          {/* Outer shell - white blocks */}
+          <rect x="4" y="4" width="4" height="8" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
+          <rect x="8" y="6" width="16" height="6" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
+          <rect x="24" y="4" width="4" height="8" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
+          <rect x="6" y="12" width="20" height="10" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
+          <rect x="8" y="22" width="16" height="6" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
+          <rect x="10" y="26" width="12" height="4" fill={foamWhite} stroke={oceanBlue} strokeWidth="1" />
           
-          {/* Shine */}
-          <ellipse cx="45" cy="50" rx="8" ry="12" fill="#ffffff" opacity="0.6" />
+          {/* Inner spiral - pixel rings */}
+          <rect x="12" y="12" width="8" height="12" fill="none" stroke={oceanLight} strokeWidth="1" />
+          <rect x="14" y="14" width="6" height="8" fill="none" stroke={oceanLight} strokeWidth="1" />
+          
+          {/* Shine - light pixels */}
+          <rect x="10" y="12" width="4" height="6" fill="#ffffff" opacity="0.6" />
+          <rect x="22" y="14" width="3" height="5" fill="#ffffff" opacity="0.5" />
         </svg>
       );
 
     default:
       return (
-        <svg viewBox="0 0 100 100" className={baseClasses}>
-          <circle cx="50" cy="50" r="40" fill={lobsterRed} />
+        <svg viewBox="0 0 32 32" className={baseClasses}>
+          <rect x="6" y="6" width="20" height="20" fill={lobsterRed} />
         </svg>
       );
   }
