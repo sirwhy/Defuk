@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const navLinks = [
@@ -14,8 +13,6 @@ const navLinks = [
 
 export default function Header() {
   const pathname = usePathname();
-  const { address, isConnected } = useAccount();
-  const shortAddr = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
 
   return (
     <header style={{
@@ -72,9 +69,9 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Connect - RainbowKit */}
+        {/* Connect - RainbowKit - Custom Show */}
         <div>
-          <ConnectButton />
+          <ConnectButton.ShowBalance={false} />
         </div>
       </div>
     </header>
