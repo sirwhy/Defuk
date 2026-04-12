@@ -368,6 +368,10 @@ a {
   animation: emoticon-float 4s ease-in-out infinite;
 }
 
+.emoticon-lightning {
+  animation: emoticon-lightning 1.5s ease-in-out infinite;
+}
+
 .emoticon-hit {
   animation: emoticon-hit 0.5s ease-out forwards;
 }

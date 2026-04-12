@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 interface AnimatedEmoticonProps {
   type: 'game' | 'shop' | 'collection' | 'win' | 'mint' | 'trading' | 'collect' | 'quest';
   size?: 'sm' | 'md' | 'lg' | 'xl';
-  animation?: 'bounce' | 'rotate' | 'pulse' | 'sparkle' | 'glow' | 'float';
+  animation?: 'bounce' | 'rotate' | 'pulse' | 'sparkle' | 'glow' | 'float' | 'lightning';
   onClick?: () => void;
   className?: string;
 }
@@ -74,7 +74,8 @@ export default function AnimatedEmoticon({
     pulse: 'animate-pulse-glow',
     sparkle: 'animate-sparkle',
     glow: 'animate-glow-pulse',
-    float: 'animate-float'
+    float: 'animate-float',
+    lightning: 'animate-lightning'
   };
 
   return (
