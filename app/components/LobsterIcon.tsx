@@ -201,110 +201,99 @@ function getLobsterSVG(type: string, frame: number) {
     case 'lobster':
       return (
         <svg viewBox="0 0 32 32" className={baseClasses}>
-          {/* Long antennae - characteristic lobster feature */}
+          {/* LONG ANTENNAE - distinctive feature */}
           <rect x="6" y="3" width="2" height="3" fill="#000000" />
-          <rect x="7" y="2" width="2" height="2" fill="#000000" />
-          <rect x="5" y="2" width="2" height="2" fill="#000000" opacity="0.7" />
+          <rect x="7" y="3" width="2" height="3" fill="#000000" />
           <rect x="24" y="3" width="2" height="3" fill="#000000" />
-          <rect x="23" y="2" width="2" height="2" fill="#000000" />
-          <rect x="25" y="2" width="2" height="2" fill="#000000" opacity="0.7" />
+          <rect x="25" y="3" width="2" height="3" fill="#000000" />
+          <rect x="7" y="4" width="1" height="1" fill="#000000" opacity="0.7" />
+          <rect x="24" y="4" width="1" height="1" fill="#000000" opacity="0.7" />
           
-          {/* Eyes - round pixel eyes on stalks */}
-          <rect x="9" y="6" width="2" height="2" fill="#000000" />
-          <rect x="21" y="6" width="2" height="2" fill="#000000" />
-          {/* Eye highlights */}
-          <rect x="9" y="6" width="1" height="1" fill="#ffffff" opacity="0.9" />
-          <rect x="21" y="6" width="1" height="1" fill="#ffffff" opacity="0.9" />
-          {/* Eye stalks */}
-          <rect x="10" y="7" width="1" height="1" fill="#000000" />
-          <rect x="22" y="7" width="1" height="1" fill="#000000" />
+          {/* EYES ON STALKS - round with highlights */}
+          <rect x="10" y="6" width="2" height="2" fill="#000000" />
+          <rect x="20" y="6" width="2" height="2" fill="#000000" />
+          <rect x="10" y="6" width="1" height="1" fill="#ffffff" opacity="0.9" />
+          <rect x="20" y="6" width="1" height="1" fill="#ffffff" opacity="0.9" />
           
-          {/* Head/Telson - distinctive shape with rostrum (nose) */}
-          <rect x="10" y="8" width="12" height="5" fill={lobsterRed} />
+          {/* HEAD - narrower */}
+          <rect x="11" y="8" width="10" height="4" fill={lobsterRed} />
           {/* Rostrum (nose spike) */}
-          <rect x="13" y="7" width="4" height="1" fill={lobsterOrange} />
-          <rect x="14" y="6" width="2" height="1" fill={lobsterRed} />
-          {/* Head highlight */}
-          <rect x="12" y="9" width="6" height="3" fill={lobsterOrange} opacity="0.4" />
+          <rect x="14" y="7" width="2" height="1" fill={lobsterOrange} />
           {/* Head segments */}
-          <rect x="10" y="8" width="2" height="2" fill={lobsterOrange} />
-          <rect x="20" y="8" width="2" height="2" fill={lobsterOrange} />
+          <rect x="11" y="8" width="2" height="2" fill={lobsterOrange} />
+          <rect x="19" y="8" width="2" height="2" fill={lobsterOrange} />
           
-          {/* Thorax - middle section */}
-          <rect x="7" y="12" width="18" height="5" fill={lobsterRed} />
+          {/* THORAX - middle section, narrower */}
+          <rect x="9" y="11" width="14" height="4" fill={lobsterRed} />
           {/* Thorax segments */}
-          <rect x="11" y="14" width="10" height="1" fill={lobsterOrange} opacity="0.3" />
-          <rect x="10" y="16" width="12" height="1" fill={lobsterOrange} opacity="0.3" />
+          <rect x="11" y="13" width="10" height="1" fill={lobsterOrange} opacity="0.3" />
+          <rect x="10" y="14" width="12" height="1" fill={lobsterOrange} opacity="0.3" />
           
-          {/* Abdomen (body) - segmented belly */}
-          <rect x="6" y="16" width="20" height="4" fill={lobsterOrange} />
-          <rect x="5" y="19" width="22" height="4" fill={lobsterRed} />
-          <rect x="4" y="22" width="24" height="3" fill={lobsterOrange} />
-          {/* Belly segments - distinct plates */}
-          <rect x="7" y="17" width="16" height="1" fill="#cc3700" opacity="0.4" />
-          <rect x="6" y="20" width="18" height="1" fill="#cc3700" opacity="0.4" />
-          <rect x="5" y="23" width="16" height="1" fill="#cc3700" opacity="0.4" />
+          {/* ABDOMEN - LONG and NARROW, NOT fat */}
+          <rect x="7" y="14" width="18" height="2" fill={lobsterOrange} />
+          <rect x="6" y="15" width="20" height="2" fill={lobsterRed} />
+          <rect x="5" y="16" width="22" height="2" fill={lobsterOrange} />
+          <rect x="6" y="17" width="20" height="2" fill={lobsterRed} />
+          <rect x="5" y="18" width="22" height="2" fill={lobsterOrange} />
+          {/* Belly segments */}
+          <rect x="8" y="15" width="16" height="1" fill={lobsterOrange} opacity="0.4" />
+          <rect x="7" y="17" width="18" height="1" fill={lobsterOrange} opacity="0.4" />
           
-          {/* BIG LOBSTER CLAWS - most important feature! */}
+          {/* BIG CLAWS - IMPORTANT! But not too big */}
           {/* Left claw - upper joint */}
-          <rect x="0" y="12" width="6" height="8" fill={clawPink} />
-          <rect x="1" y="13" width="4" height="6" fill="#ffb6c1" opacity="0.7" />
-          <rect x="0" y="11" width="2" height="2" fill={clawPink} />
-          {/* Left claw - pincer/digit (opening and closing) */}
-          <rect x="0" y="10" width="3" height="4" fill={clawPink}
-                style={{ transform: `rotate(${Math.sin(frame * 0.1) * 15 - 10}deg)`, transformOrigin: '3px 12px' }} />
-          <rect x="1" y="10" width="2" height="2" fill="#ffb6c1" opacity="0.7" />
-          {/* Left claw detail - inner texture */}
-          <rect x="2" y="14" width="2" height="2" fill={lobsterRed} opacity="0.2" />
-          
+          <rect x="2" y="11" width="6" height="7" fill={clawPink} />
+          <rect x="3" y="12" width="4" height="5" fill="#ffb6c1" opacity="0.7" />
+          <rect x="2" y="11" width="2" height="2" fill={clawPink} />
+          {/* Left claw - pincer digit */}
+          <rect x="2" y="10" width="3" height="4" fill={clawPink}
+                style={{ transform: `rotate(${Math.sin(frame * 0.1) * 15 - 10}deg)`, transformOrigin: '4px 11px' }} />
+          <rect x="3" y="10" width="2" height="2" fill="#ffb6c1" opacity="0.7" />
+          <rect x="3" y="13" width="1" height="1" fill={lobsterRed} opacity="0.2" />
           {/* Right claw - upper joint */}
-          <rect x="26" y="12" width="6" height="8" fill={clawPink} />
-          <rect x="27" y="13" width="4" height="6" fill="#ffb6c1" opacity="0.7" />
-          <rect x="32" y="11" width="2" height="2" fill={clawPink} />
-          {/* Right claw - pincer/digit */}
-          <rect x="29" y="10" width="3" height="4" fill={clawPink}
-                style={{ transform: `rotate(${Math.cos(frame * 0.1) * 15 + 10}deg)`, transformOrigin: '29px 12px' }} />
-          <rect x="29" y="10" width="2" height="2" fill="#ffb6c1" opacity="0.7" />
-          {/* Right claw detail */}
-          <rect x="28" y="14" width="2" height="2" fill={lobsterRed} opacity="0.2" />
+          <rect x="24" y="11" width="6" height="7" fill={clawPink} />
+          <rect x="25" y="12" width="4" height="5" fill="#ffb6c1" opacity="0.7" />
+          <rect x="30" y="11" width="2" height="2" fill={clawPink} />
+          {/* Right claw - pincer digit */}
+          <rect x="27" y="10" width="3" height="4" fill={clawPink}
+                style={{ transform: `rotate(${Math.cos(frame * 0.1) * 15 + 10}deg)`, transformOrigin: '28px 11px' }} />
+          <rect x="27" y="10" width="2" height="2" fill="#ffb6c1" opacity="0.7" />
+          <rect x="28" y="13" width="1" height="1" fill={lobsterRed} opacity="0.2" />
           
-          {/* Walking legs - 8 legs total (4 pairs) */}
-          {/* Left walking legs */}
-          <rect x="3" y="18" width="2" height="4" fill="#cc3700" />
-          <rect x="2" y="21" width="2" height="3" fill="#cc3700" />
-          <rect x="1" y="23" width="2" height="2" fill="#cc3700" opacity="0.8" />
-          <rect x="5" y="22" width="2" height="3" fill="#cc3700" />
-          <rect x="6" y="24" width="2" height="2" fill="#cc3700" opacity="0.8" />
-          {/* Right walking legs */}
-          <rect x="27" y="18" width="2" height="4" fill="#cc3700" />
-          <rect x="28" y="21" width="2" height="3" fill="#cc3700" />
-          <rect x="29" y="23" width="2" height="2" fill="#cc3700" opacity="0.8" />
-          <rect x="24" y="22" width="2" height="3" fill="#cc3700" />
-          <rect x="23" y="24" width="2" height="2" fill="#cc3700" opacity="0.8" />
+          {/* WALKING LEGS - 8 total, thinner */}
+          {/* Left legs */}
+          <rect x="1" y="16" width="2" height="3" fill="#cc3700" />
+          <rect x="2" y="17" width="2" height="2" fill="#cc3700" />
+          <rect x="1" y="18" width="2" height="2" fill="#cc3700" opacity="0.8" />
+          <rect x="4" y="17" width="2" height="2" fill="#cc3700" />
+          <rect x="5" y="18" width="2" height="2" fill="#cc3700" opacity="0.8" />
+          {/* Right legs */}
+          <rect x="29" y="16" width="2" height="3" fill="#cc3700" />
+          <rect x="28" y="17" width="2" height="2" fill="#cc3700" />
+          <rect x="29" y="18" width="2" height="2" fill="#cc3700" opacity="0.8" />
+          <rect x="26" y="17" width="2" height="2" fill="#cc3700" />
+          <rect x="25" y="18" width="2" height="2" fill="#cc3700" opacity="0.8" />
           
-          {/* Swimming legs - uropods/tail fan */}
-          {/* Central tail section */}
-          <rect x="12" y="24" width="8" height="3" fill={lobsterRed} />
-          {/* Left swimmeret */}
-          <rect x="6" y="24" width="4" height="2" fill={lobsterOrange}
-                style={{ transform: `rotate(${Math.sin(frame * 0.12) * 10 - 8}deg)`, transformOrigin: '8px 24px' }} />
-          {/* Right swimmeret */}
-          <rect x="22" y="24" width="4" height="2" fill={lobsterOrange}
-                style={{ transform: `rotate(${Math.cos(frame * 0.12) * 10 + 8}deg)`, transformOrigin: '24px 24px' }} />
-          {/* Tail fan (uropods and telson) */}
-          <rect x="8" y="26" width="16" height="4" fill={lobsterOrange}
-                style={{ transform: `rotate(${Math.sin(frame * 0.08) * 5}deg)`, transformOrigin: '16px 28px' }} />
-          {/* Tail tip */}
-          <rect x="14" y="28" width="4" height="2" fill={lobsterRed} />
-          {/* Tail edge detail */}
-          <rect x="8" y="26" width="2" height="2" fill={lobsterRed} />
-          <rect x="22" y="26" width="2" height="2" fill={lobsterRed} />
-          {/* Central spine */}
-          <rect x="15" y="26" width="2" height="3" fill={lobsterOrange} />
+          {/* TAIL FAN - distinctive fan shape */}
+          {/* Swimming legs */}
+          <rect x="4" y="18" width="3" height="2" fill={lobsterOrange}
+                style={{ transform: `rotate(${Math.sin(frame * 0.12) * 10 - 8}deg)`, transformOrigin: "6px 18px" }} />
+          <rect x="25" y="18" width="3" height="2" fill={lobsterOrange}
+                style={{ transform: `rotate(${Math.cos(frame * 0.12) * 10 + 8}deg)`, transformOrigin: "26px 18px" }} />
+          {/* Main tail */}
+          <rect x="10" y="20" width="12" height="2" fill={lobsterRed}
+                style={{ transform: `rotate(${Math.sin(frame * 0.08) * 5}deg)`, transformOrigin: '16px 22px' }} />
+          {/* Left uropod (tail fan) */}
+          <rect x="5" y="20" width="5" height="3" fill={lobsterOrange}
+                style={{ transform: `rotate(${Math.sin(frame * 0.08) * 12}deg)`, transformOrigin: '8px 22px' }} />
+          {/* Right uropod (tail fan) */}
+          <rect x="22" y="20" width="5" height="3" fill={lobsterOrange}
+                style={{ transform: `rotate(${Math.cos(frame * 0.08) * 12}deg)`, transformOrigin: '24px 22px' }} />
+          {/* Central telson (tail tip) */}
+          <rect x="13" y="20" width="6" height="2" fill={lobsterRed} />
           
-          {/* Additional body detail - texture */}
-          <rect x="9" y="10" width="2" height="1" fill={lobsterOrange} opacity="0.5" />
-          <rect x="21" y="10" width="2" height="1" fill={lobsterOrange} opacity="0.5" />
+          {/* Body details */}
+          <rect x="12" y="9" width="2" height="1" fill={lobsterOrange} opacity="0.5" />
+          <rect x="18" y="9" width="2" height="1" fill={lobsterOrange} opacity="0.5" />
         </svg>
       );
 
