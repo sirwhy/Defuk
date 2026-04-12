@@ -3,5 +3,9 @@
 import LobsterHome from './components/LobsterHome';
 
 export default function Home() {
-  return <LobsterHome />;
+  return (
+    <div className="pixel-art">
+      <LobsterHome />
+    </div>
+  );
 }
