@@ -288,11 +288,12 @@ export default function LobsterHome() {
                 </Link>
               </>
             ) : (
-              <ConnectButton 
-                showBalance={false} 
-                accountStatus="address"
-                className="lobster-wallet-btn"
-              />
+              <div className="lobster-wallet-btn">
+                <ConnectButton 
+                  showBalance={false} 
+                  accountStatus="address"
+                />
+              </div>
             )}
           </div>
 
@@ -471,11 +472,12 @@ export default function LobsterHome() {
               START YOUR OCEAN JOURNEY
             </Link>
           ) : (
-            <ConnectButton 
-              showBalance={false} 
-              accountStatus="address"
-              className="lobster-wallet-btn-large"
-            />
+            <div className="lobster-wallet-btn-large">
+              <ConnectButton 
+                showBalance={false} 
+                accountStatus="address"
+              />
+            </div>
           )}
         </div>
       </section>
