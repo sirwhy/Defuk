@@ -1,9 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { usePrivy } from '@privy-io/react-auth';
-import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { CONTRACT_ADDRESSES, MARKETPLACE_ABI } from '../wagmi';
+import { useAccount, useWriteContract } from 'wagmi';
 import Link from 'next/link';
 
 interface NFT {
@@ -15,93 +13,80 @@ interface NFT {
   seller: string;
 }
 
-export default function Marketplace() {
-  const { user, authenticated } = usePrivy();
-  const [buying, setBuying] = useState<number | null>(null);
-  
-  // Get address from Privy embedded wallet
-  const address = user?.wallet?.address;
+const mockListings: NFT[] = [
+  { id: 1, image: '🎨', name: 'Cosmic Dreams #42', collection: 'Cosmic Dreams', price: 0.015, seller: '0x742...' },
+  { id: 2, image: '🚀', name: 'Space Voyager #18', collection: 'Space Voyagers', price: 0.028, seller: '0x123...' },
+  { id: 3, image: '🌟', name: 'Pixel Star #99', collection: 'Pixel Stars', price: 0.012, seller: '0x456...' },
+  { id: 4, image: '🦋', name: 'Digital Butterfly #7', collection: 'Digital Butterflies', price: 0.035, seller: '0x789...' },
+  { id: 5, image: '🔥', name: 'Fire Element #23', collection: 'Elements', price: 0.022, seller: '0xabc...' },
+  { id: 6, image: '💎', name: 'Crystal Gems #56', collection: 'Crystal Gems', price: 0.045, seller: '0xdef...' },
+  { id: 7, image: '🌊', name: 'Ocean Wave #11', collection: 'Ocean Series', price: 0.019, seller: '0x987...' },
+  { id: 8, image: '🍀', name: 'Lucky Clover #3', collection: 'Lucky Collection', price: 0.008, seller: '0x654...' },
+];
 
-  // Mock listings - in production, fetch from marketplace contract
-  const [listings] = useState<NFT[]>([
-    { id: 1, image: '🎨', name: 'Cosmic Dreams #42', collection: 'Cosmic Dreams', price: 0.015, seller: '0x742d35Cc6634C0532925a3b844Bc9e7595f...' },
-    { id: 2, image: '🚀', name: 'Space Voyager #18', collection: 'Space Voyagers', price: 0.028, seller: '0x123d35Cc6634C0532925a3b844Bc9e7595f...' },
-    { id: 3, image: '🌟', name: 'Pixel Star #99', collection: 'Pixel Stars', price: 0.012, seller: '0x456d35Cc6634C0532925a3b844Bc9e7595f...' },
-    { id: 4, image: '🦋', name: 'Digital Butterfly #7', collection: 'Digital Butterflies', price: 0.035, seller: '0x789d35Cc6634C0532925a3b844Bc9e7595f...' },
-    { id: 5, image: '🔥', name: 'Fire Element #23', collection: 'Elements', price: 0.022, seller: '0xabcd35Cc6634C0532925a3b844Bc9e7595f...' },
-    { id: 6, image: '💎', name: 'Crystal Gems #56', collection: 'Crystal Gems', price: 0.045, seller: '0xdefd35Cc6634C0532925a3b844Bc9e7595f...' },
-  ]);
+export default function Marketplace() {
+  const { isConnected } = useAccount();
+  const [listings] = useState<NFT[]>(mockListings);
+  const [sortBy, setSortBy] = useState<'newest' | 'price-low' | 'price-high'>('newest');
 
   const { writeContract } = useWriteContract();
 
-  const handleBuy = async (listing: NFT) => {
-    if (!address) {
-      alert('Please connect wallet first');
-      return;
-    }
+  const sortedListings = [...listings].sort((a, b) => {
+    if (sortBy === 'price-low') return a.price - b.price;
+    if (sortBy === 'price-high') return b.price - a.price;
+    return b.id - a.id;
+  });
 
-    setBuying(listing.id);
-    
-    try {
-      // Buy listing - send ETH equal to price
-      writeContract({
-        address: CONTRACT_ADDRESSES.marketplace as `0x${string}`,
-        abi: MARKETPLACE_ABI,
-        functionName: 'buyListing',
-        args: [BigInt(listing.id)],
-        value: BigInt(Math.floor(listing.price * 1e18)),
-      });
-    } catch (error) {
-      console.error('Buy error:', error);
-      alert('Failed to buy NFT');
-    }
-    
-    setBuying(null);
+  const handleBuy = (listing: NFT) => {
+    // Placeholder - add actual contract call
+    alert('Buy functionality will work after deploying contracts!');
   };
 
   return (
     <div className="min-h-screen pt-32 pb-20">
       <div className="container">
-        <h1 className="text-4xl font-bold text-center mb-4">NFT Marketplace</h1>
-        <p className="text-[rgba(248,250,252,0.6)] text-center mb-12">
-          Buy and sell unique digital assets
-        </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-2">Marketplace</h1>
+            <p className="text-[rgba(248,250,252,0.5)]">Discover and collect unique NFTs</p>
+          </div>
+          <select 
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as any)}
+            className="bg-[#11111a] border border-white/[0.1] rounded-lg px-4 py-2 text-sm"
+          >
+            <option value="newest">Newest</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+          </select>
+        </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {listings.map((nft) => (
-            <div
-              key={nft.id}
-              className="bg-white/[0.02] border border-white/[0.06] rounded-2xl p-4 hover:border-[#8b5cf6]/30 transition-all"
-            >
-              <div className="aspect-square bg-gradient-to-br from-[#8b5cf6]/20 to-[#ec4899]/20 rounded-xl mb-4 flex items-center justify-center text-6xl">
-                {nft.image}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {sortedListings.map((listing) => (
+            <div key={listing.id} className="glass-card overflow-hidden group">
+              <div className="aspect-square bg-gradient-to-br from-[#1a1a25] to-[#11111a] flex items-center justify-center">
+                <span className="text-8xl transform group-hover:scale-110 transition-transform duration-500">{listing.image}</span>
               </div>
-              <h3 className="font-medium mb-1">{nft.name}</h3>
-              <p className="text-sm text-[rgba(248,250,252,0.4)] mb-3">{nft.collection}</p>
-              
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-[#8b5cf6] font-bold">{nft.price} ETH</span>
-                <span className="text-xs text-[rgba(248,250,252,0.4)]">
-                  {nft.seller.slice(0, 6)}...
-                </span>
+              <div className="p-4">
+                <p className="text-xs text-[rgba(248,250,252,0.4)] mb-1">{listing.collection}</p>
+                <h3 className="font-semibold mb-3">{listing.name}</h3>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-[rgba(248,250,252,0.4)]">Price</p>
+                    <p className="text-lg font-bold text-[#8b5cf6]">Ξ {listing.price}</p>
+                  </div>
+                  <button
+                    onClick={() => handleBuy(listing)}
+                    disabled={!isConnected}
+                    className="btn btn-primary text-sm px-4 py-2 disabled:opacity-50"
+                  >
+                    Buy
+                  </button>
+                </div>
               </div>
-
-              <button
-                onClick={() => handleBuy(nft)}
-                disabled={buying === nft.id || !authenticated}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-[#8b5cf6] to-[#ec4899] text-white font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {buying === nft.id ? 'Buying...' : 'Buy Now'}
-              </button>
             </div>
           ))}
         </div>
-
-        {listings.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-[rgba(248,250,252,0.6)]">No listings available</p>
-          </div>
-        )}
       </div>
     </div>
   );

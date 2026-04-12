@@ -1,42 +1,29 @@
 'use client';
 
 import * as React from 'react';
-import { PrivyProvider } from '@privy-io/react-auth';
-import { PrivyWagmiConnector } from '@privy-io/wagmi-connector';
-import { base, baseSepolia } from 'wagmi/chains';
-import { http } from 'viem';
-import { createConfig } from 'wagmi';
+import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
+import { WagmiProvider } from 'wagmi';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { wagmiConfig } from './wagmi';
 
-const wagmiConfig = createConfig({
-  chains: [base, baseSepolia],
-  transports: {
-    [base.id]: http(),
-    [baseSepolia.id]: http(),
-  },
-});
-
-const privyConfig = {
-  // Replace with your Privy App ID from https://dashboard.privy.io
-  // Get your free app ID at https://privy.io
-  appId: process.env.NEXT_PUBLIC_PRIVY_APP_ID || 'YOUR_PRIVY_APP_ID',
-  appearance: {
-    theme: 'dark',
-    accentColor: '#8b5cf6',
-    logo: 'https://your-logo-url.com/logo.png',
-  },
-  embeddedWallets: {
-    createOnLogin: 'all-users',
-  },
-};
+const queryClient = new QueryClient();
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <PrivyProvider
-      config={privyConfig}
-    >
-      <PrivyWagmiConnector wagmiConfig={wagmiConfig}>
-        {children}
-      </PrivyWagmiConnector>
-    </PrivyProvider>
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <RainbowKitProvider 
+          theme={darkTheme({
+            accentColor: '#8b5cf6',
+            accentColorForeground: 'white',
+            borderRadius: 'medium',
+            fontStack: 'system',
+            overlayBlur: 'small',
+          })}
+        >
+          {children}
+        </RainbowKitProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   );
 }

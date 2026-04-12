@@ -1,251 +1,130 @@
 'use client';
 
 import Link from 'next/link';
-import { usePrivy } from '@privy-io/react-auth';
+import { useAccount } from 'wagmi';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
-// Retro gaming features - unique & fun!
 const features = [
   {
-    icon: '🎮',
-    title: 'Mint It',
-    description: 'Upload your art. Press START. Boom - NFT minted!',
-    color: 'var(--neon-green)'
+    icon: '🎨',
+    title: 'Easy Minting',
+    description: 'Upload your artwork and mint NFTs in seconds with our simple interface.'
   },
   {
     icon: '🛒',
-    title: 'Trade It',
-    description: 'Buy & sell on the marketplace. No middleman.',
-    color: 'var(--neon-pink)'
+    title: 'Instant Trading',
+    description: 'Buy and sell NFTs instantly at fixed prices with secure transactions.'
   },
   {
-    icon: '💎',
-    title: 'Collect It',
-    description: 'Build your collection. Become a legendary collector.',
-    color: 'var(--neon-cyan)'
+    icon: '🔒',
+    title: 'Secure',
+    description: 'Smart contracts ensure safe and transparent transactions.'
   },
   {
-    icon: '🎯',
-    title: 'Win It',
-    description: 'Low fees on Base chain. Keep more of your gains.',
-    color: 'var(--neon-yellow)'
+    icon: '⚡',
+    title: 'Low Fees',
+    description: 'Built on Base network for minimal gas fees.'
   },
 ];
 
-// Fake stats - but who cares, it looks cool!
 const stats = [
-  { value: '9,999', label: 'NFTs MINTED' },
-  { value: '4,201', label: 'PLAYERS' },
-  { value: '∞', label: 'POSSIBILITIES' },
+  { value: '10K+', label: 'NFTs Listed' },
+  { value: '5K+', label: 'Active Users' },
+  { value: '50K+', label: 'Transactions' },
 ];
 
 export default function Home() {
-  const { user, authenticated } = usePrivy();
+  const { isConnected } = useAccount();
 
   return (
-    <div className="min-h-screen" style={{ background: 'var(--bg-dark)' }}>
-      
-      {/* Header */}
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: 'rgba(13,13,13,0.95)',
-        borderBottom: '2px solid #333',
-        backdropFilter: 'blur(10px)'
-      }}>
-        <div className="container" style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '70px'
-        }}>
-          {/* Logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              background: 'linear-gradient(135deg, var(--neon-green), var(--neon-pink))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px'
-            }}>
-              🎮
-            </div>
-            <span className="retro-title" style={{ fontSize: '18px' }}>
-              DE<span style={{ color: 'var(--neon-green)' }}>FUK</span>
-            </span>
-          </Link>
-
-          {/* Nav */}
-          <nav style={{ display: 'flex', gap: '8px' }}>
-            <Link href="/" className="pixel-btn" style={{ padding: '8px 16px', fontSize: '8px' }}>
-              HOME
-            </Link>
-            <Link href="/marketplace" className="pixel-btn" style={{ padding: '8px 16px', fontSize: '8px' }}>
-              SHOP
-            </Link>
-            <Link href="/mint" className="pixel-btn" style={{ padding: '8px 16px', fontSize: '8px' }}>
-              MINT
-            </Link>
-          </nav>
-
-          {/* Connect */}
-          <div>
-            <PrivyBtn />
-          </div>
-        </div>
-      </header>
-
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section style={{
-        paddingTop: '140px',
-        paddingBottom: '80px',
-        textAlign: 'center',
-        position: 'relative'
-      }}>
-        {/* Background Grid */}
-        <div style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `
-            linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          opacity: 0.5
-        }} />
+      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        {/* Animated Background Orbs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#8b5cf6]/20 blur-[120px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#ec4899]/15 blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+        </div>
 
-        <div className="container" style={{ position: 'relative' }}>
-          {/* Subtitle */}
-          <div style={{
-            display: 'inline-block',
-            padding: '8px 16px',
-            border: '2px solid var(--neon-cyan)',
-            color: 'var(--neon-cyan)',
-            fontFamily: 'var(--font-pixel)',
-            fontSize: '10px',
-            marginBottom: '24px'
-          }}>
-            <span className="blink">▸</span> POWERED BY BASE NETWORK
-          </div>
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto text-center stagger-children">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] border border-white/[0.1] mb-8">
+              <span className="w-2 h-2 rounded-full bg-[#8b5cf6] animate-pulse" />
+              <span className="text-sm text-[rgba(248,250,252,0.7)]">Powered by Base Network</span>
+            </div>
 
-          {/* Main Title - Different from generic */}
-          <h1 style={{
-            fontFamily: 'var(--font-silkscreen)',
-            fontSize: 'clamp(32px, 8vw, 72px)',
-            color: 'var(--text-bright)',
-            marginBottom: '16px',
-            textTransform: 'uppercase',
-            letterSpacing: '4px'
-          }}>
-            CREATE YOUR
-            <br />
-            <span className="neon-green" style={{ textShadow: '0 0 20px var(--neon-green)' }}>
-              DIGITAL REALITY
-            </span>
-          </h1>
+            {/* Title */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+              Create & Trade
+              <br />
+              <span className="gradient-text">Digital Assets</span>
+            </h1>
 
-          {/* Subtitle - No generic corporate speak */}
-          <p style={{
-            fontFamily: 'var(--font-retro)',
-            fontSize: '24px',
-            color: 'var(--text-muted)',
-            maxWidth: '600px',
-            margin: '0 auto 32px',
-            lineHeight: 1.4
-          }}>
-            No boring paperwork. No complicated steps. 
-            Just upload, mint, and trade. That's it.
-          </p>
+            {/* Description */}
+            <p className="text-lg md:text-xl text-[rgba(248,250,252,0.6)] max-w-2xl mx-auto mb-10 leading-relaxed">
+              The next-generation NFT marketplace. Mint your own NFTs, discover unique digital art, 
+              and trade with confidence on a secure platform.
+            </p>
 
-          {/* CTA Buttons */}
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
-            {authenticated ? (
-              <>
-                <Link href="/mint" className="btn-retro">
-                  ⚡ START MINTING
-                </Link>
-                <Link href="/marketplace" style={{
-                  fontFamily: 'var(--font-silkscreen)',
-                  color: 'var(--text-muted)',
-                  padding: '12px 24px',
-                  border: '2px solid #333'
-                }}>
-                  EXPLORE
-                </Link>
-              </>
-            ) : (
-              <PrivyBtn />
-            )}
-          </div>
-
-          {/* Stats - Retro style */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '40px',
-            flexWrap: 'wrap'
-          }}>
-            {stats.map((stat, i) => (
-              <div key={i} style={{ textAlign: 'center' }}>
-                <div className="stat-pixel">{stat.value}</div>
-                <div style={{
-                  fontFamily: 'var(--font-pixel)',
-                  fontSize: '8px',
-                  color: 'var(--text-muted)',
-                  marginTop: '4px'
-                }}>
-                  {stat.label}
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+              {isConnected ? (
+                <>
+                  <Link href="/mint" className="btn btn-primary text-lg px-8 py-4">
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                    </svg>
+                    Mint NFT
+                  </Link>
+                  <Link href="/marketplace" className="btn btn-ghost text-lg px-8 py-4">
+                    Explore Marketplace
+                  </Link>
+                </>
+              ) : (
+                <div className="flex flex-col items-center gap-4">
+                  <ConnectButton />
+                  <p className="text-[rgba(248,250,252,0.4)] text-sm">Connect wallet to get started</p>
                 </div>
-              </div>
-            ))}
+              )}
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center justify-center gap-8 md:gap-16">
+              {stats.map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold gradient-text mb-1">{stat.value}</div>
+                  <div className="text-sm text-[rgba(248,250,252,0.4)]">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Features - Retro Cards */}
-      <section style={{ padding: '80px 0', background: '#111' }}>
+      {/* Features Section */}
+      <section className="py-24 bg-[#0a0a0f]">
         <div className="container">
-          <h2 style={{
-            fontFamily: 'var(--font-silkscreen)',
-            fontSize: '24px',
-            textAlign: 'center',
-            marginBottom: '40px',
-            color: 'var(--text-bright)'
-          }}>
-            <span style={{ color: 'var(--neon-pink)' }}>▣</span> GAME FEATURES
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Everything You Need
+            </h2>
+            <p className="text-[rgba(248,250,252,0.5)] max-w-xl mx-auto">
+              A complete platform for creating and trading digital collectibles
+            </p>
+          </div>
 
-          <div className="grid-cards">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((feature, i) => (
               <div 
                 key={i}
-                className="retro-card"
-                style={{ cursor: 'pointer' }}
+                className="glass-card p-6 group hover:scale-[1.02] transition-transform duration-300"
               >
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>
+                <div className="text-4xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </div>
-                <h3 style={{
-                  fontFamily: 'var(--font-silkscreen)',
-                  fontSize: '18px',
-                  color: feature.color,
-                  marginBottom: '12px'
-                }}>
-                  {feature.title}
-                </h3>
-                <p style={{
-                  fontFamily: 'var(--font-retro)',
-                  fontSize: '20px',
-                  color: 'var(--text-muted)',
-                  lineHeight: 1.4
-                }}>
+                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                <p className="text-[rgba(248,250,252,0.5)] text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -255,119 +134,27 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section style={{
-        padding: '80px 0',
-        textAlign: 'center',
-        background: 'linear-gradient(180deg, #111 0%, var(--bg-dark) 100%)'
-      }}>
-        <div className="container">
-          <h2 style={{
-            fontFamily: 'var(--font-silkscreen)',
-            fontSize: '28px',
-            color: 'var(--text-bright)',
-            marginBottom: '16px'
-          }}>
-            READY TO <span className="neon-green">PLAY</span>?
-          </h2>
-          <p style={{
-            fontFamily: 'var(--font-retro)',
-            fontSize: '22px',
-            color: 'var(--text-muted)',
-            marginBottom: '32px'
-          }}>
-            Join thousands of players in the NFT universe.
-          </p>
-          
-          {authenticated ? (
-            <Link href="/mint" className="btn-retro">
-              🎯 START YOUR QUEST
-            </Link>
-          ) : (
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <PrivyBtn />
-            </div>
-          )}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#8b5cf6]/5 to-transparent" />
+        <div className="container relative">
+          <div className="max-w-3xl mx-auto text-center glass-card p-12 lg:p-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              Ready to Start?
+            </h2>
+            <p className="text-[rgba(248,250,252,0.5)] mb-8 max-w-lg mx-auto">
+              Join thousands of creators and collectors. 
+              Your digital assets await.
+            </p>
+            {isConnected ? (
+              <Link href="/mint" className="btn btn-primary text-lg px-10 py-4">
+                Start Creating
+              </Link>
+            ) : (
+              <ConnectButton />
+            )}
+          </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer style={{
-        padding: '40px 0',
-        borderTop: '2px solid #222',
-        textAlign: 'center'
-      }}>
-        <div className="container">
-          <p style={{
-            fontFamily: 'var(--font-pixel)',
-            fontSize: '8px',
-            color: '#444'
-          }}>
-            © 2026 DEFK NFT MARKETPLACE. ALL RIGHTS RESERVED.
-            <br />
-            <span style={{ color: 'var(--neon-green)' }}>BUILT ON BASE</span> • <span style={{ color: 'var(--neon-pink)' }}>POWERED BY YOU</span>
-          </p>
-        </div>
-      </footer>
     </div>
-  );
-}
-
-// Compact login button
-function PrivyBtn() {
-  const { login, logout, user, authenticated, ready } = usePrivy();
-  const address = user?.wallet?.address;
-  const shortAddr = address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '';
-
-  if (!ready) {
-    return (
-      <div style={{
-        fontFamily: 'var(--font-pixel)',
-        fontSize: '8px',
-        color: 'var(--text-muted)',
-        padding: '8px 16px',
-        border: '2px solid #333'
-      }}>
-        LOADING...
-      </div>
-    );
-  }
-
-  if (authenticated) {
-    return (
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-        <span style={{
-          fontFamily: 'var(--font-retro)',
-          fontSize: '16px',
-          color: 'var(--neon-green)',
-          padding: '8px 12px',
-          border: '2px solid var(--neon-green)',
-          background: 'rgba(57, 255, 20, 0.1)'
-        }}>
-          {shortAddr}
-        </span>
-        <button
-          onClick={logout}
-          style={{
-            fontFamily: 'var(--font-pixel)',
-            fontSize: '8px',
-            padding: '8px 12px',
-            border: '2px solid #333',
-            color: 'var(--text-muted)',
-            cursor: 'pointer'
-          }}
-        >
-          QUIT
-        </button>
-      </div>
-    );
-  }
-
-  return (
-    <button
-      onClick={login}
-      className="pixel-btn"
-    >
-      START GAME
-    </button>
   );
 }
