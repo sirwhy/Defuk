@@ -1,30 +1,58 @@
+/**
+ * Pixel Game Theme - Main CSS
+ * Retro 8-bit game aesthetics
+ * Powered by Higgsfield.ai & MotionSite.ai inspiration
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&display=swap');
 
+/* ================================
+   Base Variables
+   ================================ */
+
 :root {
-  /* Retro Gaming Colors */
-  --bg-dark: #0d0d0d;
-  --bg-card: #1a1a1a;
+  /* Retro Gaming Palette */
+  --pixel-black: #0d0d0d;
+  --pixel-dark: #1a1a1a;
+  --pixel-gray: #333333;
   
-  /* Neon Accents */
-  --neon-green: #39ff14;
-  --neon-pink: #ff6ec7;
-  --neon-cyan: #00ffff;
-  --neon-yellow: #ffff00;
+  /* Neon Game Colors */
+  --pixel-green: #39ff14;
+  --pixel-pink: #ff6ec7;
+  --pixel-cyan: #00ffff;
+  --pixel-yellow: #ffff00;
+  --pixel-red: #ff0040;
+  --pixel-purple: #9d4edd;
   
-  /* Text */
-  --text-primary: #e0e0e0;
-  --text-muted: #888888;
-  --text-bright: #ffffff;
+  /* Text Colors */
+  --pixel-white: #ffffff;
+  --pixel-gray-light: #e0e0e0;
+  --pixel-gray-muted: #888888;
+  
+  /* Old Variables (for backward compatibility) */
+  --bg-dark: var(--pixel-black);
+  --bg-card: var(--pixel-dark);
+  --neon-green: var(--pixel-green);
+  --neon-pink: var(--pixel-pink);
+  --neon-cyan: var(--pixel-cyan);
+  --neon-yellow: var(--pixel-yellow);
+  --text-primary: var(--pixel-white);
+  --text-muted: var(--pixel-gray-muted);
+  --text-bright: var(--pixel-white);
   
   /* Fonts */
   --font-pixel: 'Press Start 2P', cursive;
   --font-retro: 'VT323', monospace;
   --font-silkscreen: 'Silkscreen', cursive;
 }
+
+/* ================================
+   Base Styles
+   ================================ */
 
 * {
   box-sizing: border-box;
@@ -38,13 +66,17 @@ html {
 
 body {
   font-family: 'VT323', monospace;
-  background: var(--bg-dark);
-  color: var(--text-primary);
+  background: var(--pixel-black);
+  color: var(--pixel-white);
   font-size: 20px;
   line-height: 1.4;
+  overflow-x: hidden;
 }
 
-/* Scanline effect */
+/* ================================
+   CRT Scanline Effect
+   ================================ */
+
 body::before {
   content: '';
   position: fixed;
@@ -61,8 +93,61 @@ body::before {
   );
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.03;
+  opacity: 0.3;
 }
+
+/* CRT Scanline Animation */
+.pixel-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(57, 255, 20, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9998;
+  animation: scanline-move 8s linear infinite;
+}
+
+@keyframes scanline-move {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ================================
+   Retro Background Grid
+   ================================ */
+
+.pixel-grid {
+  position: relative;
+  background-image: 
+    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: retro-grid-move 10s linear infinite;
+}
+
+@keyframes retro-grid-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
+  }
+}
+
+/* ================================
+   Container
+   ================================ */
 
 .container {
   max-width: 1200px;
@@ -70,131 +155,249 @@ body::before {
   padding: 0 20px;
 }
 
-/* Neon text */
-.neon-green {
-  color: var(--neon-green);
-  text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
-}
+/* ================================
+   Pixel Buttons
+   ================================ */
 
-.neon-pink {
-  color: var(--neon-pink);
-  text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-}
-
-/* Retro button */
 .pixel-btn {
-  font-family: var(--font-pixel);
+  font-family: 'Press Start 2P', cursive;
   font-size: 10px;
   padding: 16px 24px;
-  background: var(--bg-card);
-  border: 4px solid var(--neon-green);
-  color: var(--neon-green);
+  background: var(--pixel-dark);
+  border: 4px solid var(--pixel-green);
+  color: var(--pixel-green);
   cursor: pointer;
   text-transform: uppercase;
+  position: relative;
   transition: all 0.1s;
-  box-shadow: 4px 4px 0 var(--neon-green), -4px -4px 0 var(--neon-pink);
+  box-shadow: 
+    4px 4px 0 var(--pixel-black),
+    -2px -2px 0 var(--pixel-pink);
 }
 
 .pixel-btn:hover {
-  background: var(--neon-green);
-  color: var(--bg-dark);
+  background: var(--pixel-green);
+  color: var(--pixel-black);
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 var(--neon-green), -2px -2px 0 var(--neon-pink);
+  box-shadow: 
+    2px 2px 0 var(--pixel-black),
+    -4px -4px 0 var(--pixel-pink);
 }
 
-/* Retro card */
-.retro-card {
-  background: var(--bg-card);
-  border: 2px solid #333;
-  padding: 20px;
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* ================================
+   Pixel Cards
+   ================================ */
+
+.retro-card,
+.pixel-card {
+  background: var(--pixel-dark);
+  border: 4px solid var(--pixel-gray);
+  padding: 24px;
   position: relative;
+  transition: all 0.2s;
 }
 
-.retro-card::before {
+.pixel-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--neon-green), var(--neon-pink), var(--neon-cyan));
+  top: -4px;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-green);
+  border: 4px solid var(--pixel-black);
 }
 
+.pixel-card::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-pink);
+  border: 4px solid var(--pixel-black);
+}
+
+.pixel-card:hover,
 .retro-card:hover {
-  border-color: var(--neon-green);
+  border-color: var(--pixel-green);
   transform: translateY(-4px);
+  box-shadow: 
+    8px 8px 0 var(--pixel-black),
+    0 0 20px rgba(57, 255, 20, 0.3);
 }
 
-/* Silkscreen font */
-.retro-title {
-  font-family: var(--font-silkscreen);
-  font-size: 28px;
-  color: var(--text-bright);
+/* ================================
+   Grid Layout
+   ================================ */
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ================================
+   Pixel Text Effects
+   ================================ */
+
+.pixel-title {
+  font-family: 'Silkscreen', cursive;
+  font-size: clamp(32px, 8vw, 72px);
+  color: var(--pixel-white);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 
+    4px 4px 0 var(--pixel-black),
+    0 0 20px var(--pixel-green);
+}
+
+.pixel-heading {
+  font-family: 'Silkscreen', cursive;
+  font-size: 24px;
+  color: var(--pixel-white);
   text-transform: uppercase;
   letter-spacing: 2px;
 }
 
-/* Stat pixel */
+.pixel-subtitle {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: var(--pixel-gray-muted);
+  line-height: 1.4;
+}
+
+/* Neon Text */
+.pixel-neon-green,
+.neon-green {
+  color: var(--pixel-green);
+  text-shadow: 0 0 10px var(--pixel-green), 0 0 20px var(--pixel-green);
+}
+
+.pixel-neon-pink,
+.neon-pink {
+  color: var(--pixel-pink);
+  text-shadow: 0 0 10px var(--pixel-pink), 0 0 20px var(--pixel-pink);
+}
+
+.pixel-neon-cyan {
+  color: var(--pixel-cyan);
+  text-shadow: 0 0 10px var(--pixel-cyan), 0 0 20px var(--pixel-cyan);
+}
+
+.pixel-neon-yellow {
+  color: var(--pixel-yellow);
+  text-shadow: 0 0 10px var(--pixel-yellow), 0 0 20px var(--pixel-yellow);
+}
+
+/* ================================
+   Retro Title
+   ================================ */
+
+.retro-title,
+.pixel-title-text {
+  font-family: 'Silkscreen', cursive;
+  font-size: 28px;
+  color: var(--pixel-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* ================================
+   Stat Pixel
+   ================================ */
+
 .stat-pixel {
-  font-family: var(--font-retro);
+  font-family: 'VT323', monospace;
   font-size: 32px;
-  color: var(--neon-green);
-  text-shadow: 0 0 5px var(--neon-green);
+  color: var(--pixel-green);
+  text-shadow: 0 0 5px var(--pixel-green);
 }
 
-/* Grid */
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 20px;
+/* ================================
+   Glass Effect
+   ================================ */
+
+.glass-card {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
 }
 
-/* Link */
+/* ================================
+   Link Styles
+   ================================ */
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Scrollbar */
+/* ================================
+   Scrollbar
+   ================================ */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
+  background: var(--pixel-black);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-green);
+  background: var(--pixel-green);
+  border: 2px solid var(--pixel-black);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--neon-pink);
+  background: var(--pixel-pink);
 }
 
 /* ================================
-   Animated Emoticons - Custom Animations
-   Powered by Higgsfield.ai & MotionSite.ai
+   Pixel Game Animations
    ================================ */
 
-/* Bounce animation with elasticity */
-@keyframes emoticon-bounce {
+/* Bounce */
+@keyframes pixel-bounce {
   0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-  25% {
-    transform: translateY(-15%) scale(1.05);
+    transform: translateY(0);
   }
   50% {
-    transform: translateY(0) scale(1);
-  }
-  75% {
-    transform: translateY(-7%) scale(1.02);
+    transform: translateY(-20%);
   }
 }
 
-/* Smooth rotation */
-@keyframes emoticon-rotate {
+.animate-pixel-bounce {
+  animation: pixel-bounce 0.6s ease-in-out infinite;
+}
+
+/* Idle */
+@keyframes pixel-idle {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1);
+  }
+}
+
+.animate-pixel-idle {
+  animation: pixel-idle 2s ease-in-out infinite;
+}
+
+/* Spin */
+@keyframes pixel-spin {
   0% {
     transform: rotate(0deg) scale(1);
   }
@@ -206,193 +409,154 @@ a {
   }
 }
 
-/* Pulse with glow effect */
-@keyframes emoticon-pulse {
+.animate-pixel-spin {
+  animation: pixel-spin 2s linear infinite;
+}
+
+/* Pulse */
+@keyframes pixel-pulse {
   0%, 100% {
     transform: scale(1);
-    filter: drop-shadow(0 0 4px currentColor);
+    filter: brightness(1);
   }
   50% {
     transform: scale(1.15);
-    filter: drop-shadow(0 0 20px currentColor);
-  }
-}
-
-/* Sparkle effect with rotation */
-@keyframes emoticon-sparkle {
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-  10% {
-    transform: scale(1.1) rotate(5deg);
-    opacity: 0.9;
-  }
-  20% {
-    transform: scale(1) rotate(-5deg);
-    opacity: 1;
-  }
-  30% {
-    transform: scale(1.15) rotate(10deg);
     filter: brightness(1.3);
   }
-  40% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
+}
+
+.animate-pixel-pulse {
+  animation: pixel-pulse 1.5s ease-in-out infinite;
+}
+
+/* Float */
+@keyframes pixel-float {
+  0%, 100% {
+    transform: translateY(0);
   }
   50% {
-    transform: scale(1.1) rotate(-10deg);
-  }
-  60% {
-    transform: scale(1) rotate(5deg);
-    opacity: 1;
-  }
-  70% {
-    transform: scale(1.2) rotate(0deg);
-    filter: brightness(1.5);
-  }
-  80% {
-    transform: scale(1) rotate(0deg);
+    transform: translateY(-15px);
   }
 }
 
-/* Glowing pulse */
-@keyframes emoticon-glow {
-  0%, 100% {
-    filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 0 16px currentColor);
-  }
-  50% {
-    filter: drop-shadow(0 0 16px currentColor) drop-shadow(0 0 32px currentColor);
-  }
+.animate-pixel-float {
+  animation: pixel-float 3s ease-in-out infinite;
 }
 
-/* Smooth floating */
-@keyframes emoticon-float {
+/* Shake */
+@keyframes pixel-shake {
   0%, 100% {
-    transform: translateY(0) translateX(0);
+    transform: translateX(0);
   }
   25% {
-    transform: translateY(-10px) translateX(5px);
-  }
-  50% {
-    transform: translateY(0) translateX(10px);
+    transform: translateX(-4px);
   }
   75% {
-    transform: translateY(10px) translateX(5px);
+    transform: translateX(4px);
   }
 }
 
-/* Hit effect (for target/win) */
-@keyframes emoticon-hit {
-  0% {
-    transform: scale(1) rotate(0deg);
+.animate-pixel-shake {
+  animation: pixel-shake 0.3s ease-in-out infinite;
+}
+
+/* Wiggle */
+@keyframes pixel-wiggle {
+  0%, 100% {
+    transform: rotate(-5deg);
   }
-  10% {
-    transform: scale(1.3) rotate(15deg);
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+.animate-pixel-wiggle {
+  animation: pixel-wiggle 0.5s ease-in-out infinite;
+}
+
+/* Glitch */
+@keyframes pixel-glitch {
+  0% {
+    transform: translate(0);
   }
   20% {
-    transform: scale(0.9) rotate(-15deg);
-  }
-  30% {
-    transform: scale(1.1) rotate(10deg);
+    transform: translate(-2px, 2px);
   }
   40% {
-    transform: scale(1) rotate(0deg);
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
   }
   100% {
-    transform: scale(1) rotate(0deg);
+    transform: translate(0);
   }
 }
 
-/* Celebration (for trophy) */
-@keyframes emoticon-celebration {
+.animate-pixel-glitch {
+  animation: pixel-glitch 0.3s ease-in-out infinite;
+}
+
+/* Neon Pulse */
+@keyframes neon-pulse {
   0%, 100% {
-    transform: rotate(0deg) translateY(0);
-  }
-  25% {
-    transform: rotate(-15deg) translateY(-5px);
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
   }
   50% {
-    transform: rotate(15deg) translateY(0);
-  }
-  75% {
-    transform: rotate(-10deg) translateY(-3px);
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
   }
 }
 
-/* Lightning effect (for mint) */
-@keyframes emoticon-lightning {
-  0%, 100% {
-    filter: drop-shadow(0 0 4px currentColor) brightness(1);
-  }
-  50% {
-    filter: drop-shadow(0 0 20px currentColor) brightness(1.5);
-  }
-  75% {
-    filter: drop-shadow(0 0 40px currentColor) brightness(2);
-  }
+.animate-neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
 }
 
-/* Slow spin */
-@keyframes emoticon-spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* ================================
+   Pixel Hover Effects
+   ================================ */
+
+.pixel-hover-bounce:hover {
+  animation: pixel-bounce 0.4s ease-in-out;
 }
 
-/* Animation utility classes */
-.emoticon-bounce {
-  animation: emoticon-bounce 2s ease-in-out infinite;
+.pixel-hover-glitch:hover {
+  animation: pixel-glitch 0.3s ease-in-out;
 }
 
-.emoticon-rotate {
-  animation: emoticon-rotate 8s linear infinite;
+.pixel-hover-pulse:hover {
+  animation: pixel-pulse 0.3s ease-in-out;
 }
 
-.emoticon-pulse {
-  animation: emoticon-pulse 2s ease-in-out infinite;
+.pixel-hover-wiggle:hover {
+  animation: pixel-wiggle 0.3s ease-in-out;
 }
 
-.emoticon-sparkle {
-  animation: emoticon-sparkle 3s ease-in-out infinite;
+/* ================================
+   Utility Classes
+   ================================ */
+
+.text-center {
+  text-align: center;
 }
 
-.emoticon-glow {
-  animation: emoticon-glow 2s ease-in-out infinite;
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.emoticon-float {
-  animation: emoticon-float 4s ease-in-out infinite;
-}
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
 
-.emoticon-lightning {
-  animation: emoticon-lightning 1.5s ease-in-out infinite;
-}
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
 
-.emoticon-hit {
-  animation: emoticon-hit 0.5s ease-out forwards;
-}
-
-.emoticon-celebration {
-  animation: emoticon-celebration 1.5s ease-in-out infinite;
-}
-
-.emoticon-lightning {
-  animation: emoticon-lightning 1.5s ease-in-out infinite;
-}
-
-.emoticon-spin-slow {
-  animation: emoticon-spin-slow 8s linear infinite;
-}
-
-/* Hover effects */
-.emoticon-hover-bounce:hover {
-  transform: scale(1.2);
-}
-
-.emoticon-hover-glow:hover {
-  filter: drop-shadow(0 0 24px currentColor);
-}
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
