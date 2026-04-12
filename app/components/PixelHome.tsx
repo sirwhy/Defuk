@@ -7,7 +7,14 @@ import PixelHeader from './PixelHeader';
 import PixelEmoticon from './PixelEmoticon';
 
 // Retro gaming features
-const features = [
+const features: Array<{
+  emoticonType: 'game' | 'shop' | 'collection' | 'win' | 'mint' | 'trading' | 'collect' | 'quest';
+  emoticonAnimation: 'bounce' | 'idle' | 'spin' | 'pulsing' | 'shake' | 'floating';
+  title: string;
+  description: string;
+  color: string;
+  bgColor: string;
+}> = [
   {
     emoticonType: 'mint',
     emoticonAnimation: 'pulsing',
