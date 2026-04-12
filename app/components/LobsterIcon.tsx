@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 
 interface LobsterIconProps {
   type: 'lobster' | 'crayfish' | 'claw' | 'shell' | 'bubble' | 'ocean' | 'fresh' | 'premium';
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl';
   animation?: 'swim' | 'wave' | 'pulse' | 'float' | 'bubble-up' | 'wave-slow' | 'fresh' | 'glow';
   className?: string;
   onClick?: () => void;
@@ -39,7 +39,8 @@ export default function LobsterIcon({
     md: 'w-16 h-16',
     lg: 'w-20 h-20',
     xl: 'w-24 h-24',
-    '2xl': 'w-32 h-32'
+    '2xl': 'w-32 h-32',
+    '3xl': 'w-40 h-40'
   };
 
   // Animation classes based on type
