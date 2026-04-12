@@ -1,117 +1,204 @@
 'use client';
 
 import Link from 'next/link';
-
-const footerLinks = {
-  Platform: [
-    { href: '/marketplace', label: 'Marketplace' },
-    { href: '/mint', label: 'Mint NFT' },
-    { href: '/collection', label: 'My Collection' },
-  ],
-  Resources: [
-    { href: '#', label: 'Docs' },
-    { href: '#', label: 'Support' },
-  ],
-  Legal: [
-    { href: '#', label: 'Terms' },
-    { href: '#', label: 'Privacy' },
-  ],
-};
+import LobsterIcon from './LobsterIcon';
 
 export default function Footer() {
   return (
     <footer style={{
       padding: '40px 0',
-      borderTop: '2px solid #222',
-      background: '#111',
-      textAlign: 'center'
+      borderTop: `4px solid var(--ocean-teal)/30`,
+      background: 'var(--ocean-deep)',
+      textAlign: 'center',
+      position: 'relative',
+      zIndex: 1
     }}>
-      <div className="container">
+      <div className="container" style={{ padding: '0 20px' }}>
+        
+        {/* Lobster decorations */}
+        <div className="flex justify-center gap-6 mb-8 pixel-art">
+          <LobsterIcon type="bubble" size="md" animation="bubble-up" className="pixel-art" />
+          <LobsterIcon type="ocean" size="md" animation="wave-slow" className="pixel-art" />
+          <LobsterIcon type="fresh" size="md" animation="fresh" className="pixel-art" />
+        </div>
+
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
           gap: '30px',
-          marginBottom: '30px'
+          marginBottom: '30px',
+          textAlign: 'left'
         }}>
           {/* Brand */}
           <div style={{ gridColumn: 'span 2' }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', justifyContent: 'center', marginBottom: '16px' }}>
-              <div style={{
-                width: '40px',
-                height: '40px',
-                background: 'linear-gradient(135deg, var(--neon-green), var(--neon-pink))',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '20px'
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '16px', justifyContent: 'center', marginBottom: '16px' }}>
+              <LobsterIcon 
+                type="lobster" 
+                size="lg" 
+                animation="swim"
+                className="pixel-art"
+              />
+              <span style={{
+                fontFamily: '"Montserrat", sans-serif',
+                fontSize: '18px',
+                fontWeight: '800',
+                background: 'linear-gradient(135deg, var(--lobster-red) 0%, var(--lobster-orange) 50%, var(--shell-gold) 100%)',
+                backgroundSize: '200% 200%',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                letterSpacing: '2px'
               }}>
-                🎮
-              </div>
-              <span className="retro-title" style={{ fontSize: '16px' }}>
-                DE<span style={{ color: 'var(--neon-green)' }}>FUK</span>
+                DE<span style={{ WebkitTextFillColor: 'var(--lobster-orange)' }}>FUK</span>
               </span>
             </Link>
             <p style={{
-              fontFamily: 'var(--font-retro)',
-              fontSize: '18px',
-              color: 'var(--text-muted)'
+              fontFamily: '"Montserrat", sans-serif',
+              fontSize: '11px',
+              color: 'var(--ocean-gray-muted)',
+              lineHeight: 1.8,
+              letterSpacing: '1px'
             }}>
               Create, collect & trade NFTs on Base.
             </p>
           </div>
 
-          {/* Links */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
-              <h4 style={{
-                fontFamily: 'var(--font-pixel)',
-                fontSize: '10px',
-                color: 'var(--text-muted)',
-                marginBottom: '12px',
-                textTransform: 'uppercase'
-              }}>
-                {title}
-              </h4>
-              <ul style={{ listStyle: 'none', padding: 0 }}>
-                {links.map((link) => (
-                  <li key={link.href + link.label} style={{ marginBottom: '8px' }}>
-                    <Link 
-                      href={link.href}
-                      style={{
-                        fontFamily: 'var(--font-retro)',
-                        fontSize: '16px',
-                        color: 'var(--text-primary)',
-                        transition: 'color 0.2s'
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Platform Links */}
+          <div>
+            <h4 style={{
+              fontFamily: '"Montserrat", sans-serif',
+              fontSize: '10px',
+              color: 'var(--ocean-teal)',
+              marginBottom: '12px',
+              textTransform: 'uppercase',
+              letterSpacing: '2px'
+            }}>
+              Platform
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '8px' }}>
+                <Link 
+                  href="/marketplace"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '11px',
+                    color: 'var(--ocean-foam-light)',
+                    transition: 'color 0.1s',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  Ocean
+                </Link>
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <Link 
+                  href="/mint"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '11px',
+                    color: 'var(--ocean-foam-light)',
+                    transition: 'color 0.1s',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  Mint NFT
+                </Link>
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <Link 
+                  href="/collection"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '11px',
+                    color: 'var(--ocean-foam-light)',
+                    transition: 'color 0.1s',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  My Treasure
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal Links */}
+          <div>
+            <h4 style={{
+              fontFamily: '"Montserrat", sans-serif',
+              fontSize: '10px',
+              color: 'var(--ocean-teal)',
+              marginBottom: '12px',
+              textTransform: 'uppercase',
+              letterSpacing: '2px'
+            }}>
+              Legal
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <li style={{ marginBottom: '8px' }}>
+                <Link 
+                  href="#"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '11px',
+                    color: 'var(--ocean-foam-light)',
+                    transition: 'color 0.1s',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  Terms
+                </Link>
+              </li>
+              <li style={{ marginBottom: '8px' }}>
+                <Link 
+                  href="#"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '11px',
+                    color: 'var(--ocean-foam-light)',
+                    transition: 'color 0.1s',
+                    letterSpacing: '1px'
+                  }}
+                >
+                  Privacy
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
 
         {/* Bottom */}
         <div style={{
           paddingTop: '20px',
-          borderTop: '2px solid #222',
+          borderTop: `2px solid var(--ocean-teal)/20`,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '16px'
+          gap: '12px'
         }}>
           <p style={{
-            fontFamily: 'var(--font-pixel)',
-            fontSize: '8px',
-            color: '#444'
+            fontFamily: '"Montserrat", sans-serif',
+            fontSize: '10px',
+            color: 'var(--ocean-gray-muted)',
+            letterSpacing: '1px'
           }}>
-            © {new Date().getFullYear()} DEFUK NFT MARKETPLACE. ALL RIGHTS RESERVED.
+            © {new Date().getFullYear()} DEFUK OCEAN NFT MARKETPLACE. ALL RIGHTS RESERVED.
           </p>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <span style={{ color: 'var(--neon-green)', fontSize: '12px' }}>BUILT ON BASE</span>
-            <span style={{ color: 'var(--neon-pink)', fontSize: '12px' }}>POWERED BY YOU</span>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <span style={{ 
+              color: 'var(--ocean-teal)', 
+              fontSize: '10px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              ⚓ BUILT ON BASE
+            </span>
+            <span style={{ 
+              color: 'var(--lobster-orange)', 
+              fontSize: '10px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase'
+            }}>
+              🦞 FRESH EVERY DAY
+            </span>
           </div>
         </div>
       </div>
