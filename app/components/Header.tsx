@@ -31,12 +31,11 @@ export default function Header() {
         justifyContent: 'space-between',
         height: '70px'
       }}>
-        {/* Logo */}
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{
             width: '50px',
             height: '50px',
-            background: 'linear-gradient(135deg, var(--neon-green), var(--neon-pink))',
+            background: 'linear-gradient(135deg, #39ff14, #ff6ec7)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -44,24 +43,35 @@ export default function Header() {
           }}>
             🎮
           </div>
-          <span className="retro-title" style={{ fontSize: '18px' }}>
-            DE<span style={{ color: 'var(--neon-green)' }}>FUK</span>
+          <span style={{
+            fontFamily: 'Silkscreen, cursive',
+            fontSize: '18px',
+            color: '#ffffff',
+            textTransform: 'uppercase',
+            letterSpacing: '2px'
+          }}>
+            DE<span style={{ color: '#39ff14' }}>FUK</span>
           </span>
         </Link>
 
-        {/* Nav - Desktop */}
-        <nav style={{ display: 'flex', gap: '8px' }} className="desktop-nav">
+        <nav style={{ display: 'flex', gap: '8px' }}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="pixel-btn"
               style={{
                 padding: '8px 16px',
                 fontSize: '8px',
-                background: pathname === link.href ? 'var(--neon-green)' : 'var(--bg-card)',
-                color: pathname === link.href ? 'var(--bg-dark)' : 'var(--neon-green)',
-                borderColor: pathname === link.href ? 'var(--neon-green)' : '#333'
+                fontFamily: '"Press Start 2P", cursive',
+                background: pathname === link.href ? '#39ff14' : '#1a1a1a',
+                color: pathname === link.href ? '#0d0d0d' : '#39ff14',
+                border: '4px solid ' + (pathname === link.href ? '#39ff14' : '#333'),
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                boxShadow: pathname === link.href 
+                  ? '2px 2px 0 #39ff14, -2px -2px 0 #ff6ec7' 
+                  : '4px 4px 0 #333',
+                transition: 'all 0.1s'
               }}
             >
               {link.label}
@@ -69,7 +79,6 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Connect - RainbowKit - Custom Show */}
         <div>
           <ConnectButton.ShowBalance={false} />
         </div>
