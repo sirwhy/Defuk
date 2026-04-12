@@ -1,96 +1,114 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
-  { href: '/', label: 'HOME' },
-  { href: '/marketplace', label: 'SHOP' },
-  { href: '/mint', label: 'MINT' },
-  { href: '/collection', label: 'COLLECTION' },
+  { href: '/', label: 'Home' },
+  { href: '/marketplace', label: 'Marketplace' },
+  { href: '/mint', label: 'Mint' },
+  { href: '/collection', label: 'My Collection' },
 ];
 
 export default function Header() {
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        background: 'rgba(13,13,13,0.95)',
-        borderBottom: '2px solid #333',
-        backdropFilter: 'blur(10px)'
-      }}
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'bg-[#030712]/80 backdrop-blur-xl border-b border-white/[0.06]' 
+          : 'bg-transparent'
+      }`}
     >
-      <div
-        className="container"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          height: '70px'
-        }}
-      >
-        <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div
-            style={{
-              width: '50px',
-              height: '50px',
-              background: 'linear-gradient(135deg, #39ff14, #ff6ec7)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px'
-            }}
-          >
-            🎮
-          </div>
-          <span
-            style={{
-              fontFamily: 'Silkscreen, cursive',
-              fontSize: '18px',
-              color: '#ffffff',
-              textTransform: 'uppercase',
-              letterSpacing: '2px'
-            }}
-          >
-            DE<span style={{ color: '#39ff14' }}>FUK</span>
-          </span>
-        </Link>
+      <div className="container">
+        <nav className="flex items-center justify-between h-20">
+          {/* Logo */}
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8b5cf6] to-[#ec4899] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <span className="text-xl font-bold font-[var(--font-display)]">
+              NFT<span className="text-[#8b5cf6]">Create</span>
+            </span>
+          </Link>
 
-        <nav style={{ display: 'flex', gap: '8px' }}>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              style={{
-                padding: '8px 16px',
-                fontSize: '8px',
-                fontFamily: '"Press Start 2P", cursive',
-                background: pathname === link.href ? '#39ff14' : '#1a1a1a',
-                color: pathname === link.href ? '#0d0d0d' : '#39ff14',
-                border: '4px solid ' + (pathname === link.href ? '#39ff14' : '#333'),
-                cursor: 'pointer',
-                textTransform: 'uppercase',
-                boxShadow: pathname === link.href
-                  ? '2px 2px 0 #39ff14, -2px -2px 0 #ff6ec7'
-                  : '4px 4px 0 #333',
-                transition: 'all 0.1s'
-              }}
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  pathname === link.href
+                    ? 'bg-white/[0.08] text-white'
+                    : 'text-[rgba(248,250,252,0.6)] hover:text-white hover:bg-white/[0.04]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Connect Button */}
+          <div className="flex items-center gap-4">
+            <div className="hidden sm:block">
+              <ConnectButton showBalance={false} chainStatus="icon" accountStatus="address" />
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button 
+              className="md:hidden p-2"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {link.label}
-            </Link>
-          ))}
+              <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {mobileMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </nav>
 
-        <div>
-          <ConnectButton.ShowBalance={false} />
-        </div>
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-white/[0.06] animate-fade-up">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                    pathname === link.href
+                      ? 'bg-white/[0.08] text-white'
+                      : 'text-[rgba(248,250,252,0.6)] hover:text-white hover:bg-white/[0.04]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pt-2">
+                <ConnectButton showBalance={false} chainStatus="icon" accountStatus="address" />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
