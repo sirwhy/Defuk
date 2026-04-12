@@ -3,32 +3,41 @@
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import AnimatedEmoticon from './components/AnimatedEmoticon';
 
-// Retro gaming features
+// Retro gaming features with animated emoticons
 const features = [
   {
-    icon: '🎮',
+    emoticonType: 'mint',
     title: 'Mint It',
     description: 'Upload art. Press START. Boom - NFT minted!',
-    color: 'var(--neon-green)'
+    color: 'var(--neon-green)',
+    animation: 'pulse',
+    size: 'lg'
   },
   {
-    icon: '🛒',
+    emoticonType: 'trading',
     title: 'Trade It',
     description: 'Buy & sell on marketplace. No middleman.',
-    color: 'var(--neon-pink)'
+    color: 'var(--neon-pink)',
+    animation: 'float',
+    size: 'lg'
   },
   {
-    icon: '💎',
+    emoticonType: 'collection',
     title: 'Collect It',
     description: 'Build collection. Become legendary.',
-    color: 'var(--neon-cyan)'
+    color: 'var(--neon-cyan)',
+    animation: 'glow',
+    size: 'lg'
   },
   {
-    icon: '🎯',
+    emoticonType: 'win',
     title: 'Win It',
     description: 'Low fees on Base. Keep more gains.',
-    color: 'var(--neon-yellow)'
+    color: 'var(--neon-yellow)',
+    animation: 'sparkle',
+    size: 'lg'
   },
 ];
 
@@ -57,17 +66,12 @@ export default function Home() {
         }}>
           {/* Logo */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              background: 'linear-gradient(135deg, var(--neon-green), var(--neon-pink))',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '24px'
-            }}>
-              🎮
-            </div>
+            <AnimatedEmoticon 
+              type="game" 
+              size="md" 
+              animation="bounce"
+              className="transform hover:scale-110 transition-transform"
+            />
             <span className="retro-title" style={{ fontSize: '18px' }}>
               DE<span style={{ color: 'var(--neon-green)' }}>FUK</span>
             </span>
@@ -124,9 +128,20 @@ export default function Home() {
             color: 'var(--neon-cyan)',
             fontFamily: 'var(--font-pixel)',
             fontSize: '10px',
-            marginBottom: '24px'
+            marginBottom: '24px',
+            animation: 'pulse 2s ease-in-out infinite'
           }}>
             ▸ POWERED BY BASE NETWORK
+          </div>
+
+          {/* Animated Hero Icon */}
+          <div style={{ marginBottom: '24px' }}>
+            <AnimatedEmoticon 
+              type="game" 
+              size="xl" 
+              animation="bounce"
+              className="mx-auto"
+            />
           </div>
 
           {/* Main Title */}
@@ -158,15 +173,17 @@ export default function Home() {
             Just upload, mint, and trade. That's it.
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with animated emoticons */}
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '48px' }}>
             {isConnected ? (
               <>
-                <Link href="/mint" className="pixel-btn" style={{ background: 'var(--neon-green)', color: 'var(--bg-dark)', borderColor: 'var(--neon-green)' }}>
-                  ⚡ START MINTING
+                <Link href="/mint" className="pixel-btn" style={{ background: 'var(--neon-green)', color: 'var(--bg-dark)', borderColor: 'var(--neon-green)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <AnimatedEmoticon type="mint" size="sm" animation="lightning" />
+                  START MINTING
                 </Link>
-                <Link href="/marketplace" className="pixel-btn">
-                  🛒 EXPLORE
+                <Link href="/marketplace" className="pixel-btn" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <AnimatedEmoticon type="trading" size="sm" animation="float" />
+                  EXPLORE
                 </Link>
               </>
             ) : (
@@ -178,7 +195,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* Features with Animated Emoticons */}
       <section style={{ padding: '80px 0', background: '#111' }}>
         <div className="container">
           <h2 style={{
@@ -194,14 +211,18 @@ export default function Home() {
           <div className="grid-cards">
             {features.map((feature, i) => (
               <div key={i} className="retro-card" style={{ cursor: 'pointer' }}>
-                <div style={{ fontSize: '48px', marginBottom: '16px' }}>
-                  {feature.icon}
-                </div>
+                <AnimatedEmoticon 
+                  type={feature.emoticonType}
+                  size="lg"
+                  animation={feature.animation}
+                  className="mx-auto"
+                />
                 <h3 style={{
                   fontFamily: 'var(--font-silkscreen)',
                   fontSize: '18px',
                   color: feature.color,
-                  marginBottom: '12px'
+                  marginBottom: '12px',
+                  marginTop: '16px'
                 }}>
                   {feature.title}
                 </h3>
@@ -226,6 +247,15 @@ export default function Home() {
         background: 'linear-gradient(180deg, #111 0%, var(--bg-dark) 100%)'
       }}>
         <div className="container">
+          <div style={{ marginBottom: '24px' }}>
+            <AnimatedEmoticon 
+              type="quest"
+              size="xl"
+              animation="pulse"
+              className="mx-auto"
+            />
+          </div>
+          
           <h2 style={{
             fontFamily: 'var(--font-silkscreen)',
             fontSize: '28px',
@@ -244,8 +274,9 @@ export default function Home() {
           </p>
           
           {isConnected ? (
-            <Link href="/mint" className="pixel-btn" style={{ background: 'var(--neon-green)', color: 'var(--bg-dark)', borderColor: 'var(--neon-green)' }}>
-              🎯 START YOUR QUEST
+            <Link href="/mint" className="pixel-btn" style={{ background: 'var(--neon-green)', color: 'var(--bg-dark)', borderColor: 'var(--neon-green)', display: 'flex', alignItems: 'center', gap: '8px', margin: '0 auto' }}>
+              <AnimatedEmoticon type="quest" size="sm" animation="pulse" />
+              START YOUR QUEST
             </Link>
           ) : (
             <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -267,7 +298,7 @@ export default function Home() {
             fontSize: '8px',
             color: '#444'
           }}>
-            © 2026 DEFK NFT MARKETPLACE. ALL RIGHTS RESERVED.
+            © 2026 DEFUK NFT MARKETPLACE. ALL RIGHTS RESERVED.
             <br />
             <span style={{ color: 'var(--neon-green)' }}>BUILT ON BASE</span> • <span style={{ color: 'var(--neon-pink)' }}>POWERED BY YOU</span>
           </p>
