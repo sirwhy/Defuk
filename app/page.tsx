@@ -6,7 +6,16 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import AnimatedEmoticon from './components/AnimatedEmoticon';
 
 // Retro gaming features with animated emoticons
-const features = [
+interface FeatureItem {
+  emoticonType: 'mint' | 'trading' | 'collection' | 'win';
+  title: string;
+  description: string;
+  color: string;
+  animation: 'pulse' | 'float' | 'glow' | 'sparkle';
+  size: 'lg';
+}
+
+const features: FeatureItem[] = [
   {
     emoticonType: 'mint',
     title: 'Mint It',
