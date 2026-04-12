@@ -32,12 +32,6 @@ const features = [
   },
 ];
 
-const stats = [
-  { value: '9,999', label: 'NFTs MINTED' },
-  { value: '4,201', label: 'PLAYERS' },
-  { value: '∞', label: 'POSSIBILITIES' },
-];
-
 export default function Home() {
   const { isConnected } = useAccount();
 
@@ -180,23 +174,6 @@ export default function Home() {
                 <ConnectButton />
               </div>
             )}
-          </div>
-
-          {/* Stats */}
-          <div style={{ display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap' }}>
-            {stats.map((stat, i) => (
-              <div key={i} style={{ textAlign: 'center' }}>
-                <div className="stat-pixel">{stat.value}</div>
-                <div style={{
-                  fontFamily: 'var(--font-pixel)',
-                  fontSize: '8px',
-                  color: 'var(--text-muted)',
-                  marginTop: '4px'
-                }}>
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
