@@ -8,6 +8,7 @@ interface LobsterIconProps {
   animation?: 'swim' | 'wave' | 'pulse' | 'float' | 'bubble-up' | 'wave-slow' | 'fresh' | 'glow';
   className?: string;
   onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
 /**
