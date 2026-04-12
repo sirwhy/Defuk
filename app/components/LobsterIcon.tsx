@@ -61,14 +61,7 @@ export default function LobsterIcon({
 
     if (!showParticles) return;
 
-    console.log('🦞 LobsterIcon clicked!', {
-      centerX,
-      centerY,
-      cursorX: e.clientX,
-      cursorY: e.clientY
-    });
-
-    // Get icon position
+    // Get icon position FIRST
     const iconRect = iconRef.current?.getBoundingClientRect();
     if (!iconRect) return;
 
@@ -95,6 +88,7 @@ export default function LobsterIcon({
     const colors = ['#006994', '#40e0d0', '#f0f8ff', '#40e0d0', '#006994'];
     const sizes = ['4px', '6px', '8px'];
 
+    console.log('🦞 LobsterIcon clicked!', { centerX, centerY, cursorX, cursorY });
     console.log(`🌊 Creating ${particleCount} particles`);
 
     for (let i = 0; i < particleCount; i++) {
