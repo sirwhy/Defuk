@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
-import PixelHeader from './components/PixelHeader';
-import PixelEmoticon from './components/PixelEmoticon';
+import PixelHeader from './PixelHeader';
+import PixelEmoticon from './PixelEmoticon';
 
 // Retro gaming features
 const features = [
