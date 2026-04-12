@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import LobsterIcon from './LobsterIcon';
+import LobsterConnectButton from './LobsterConnectButton';
 
 // Lobster Ocean features
 const features: Array<{
@@ -289,12 +290,7 @@ export default function LobsterHome() {
                 </Link>
               </>
             ) : (
-              <div className="lobster-wallet-btn">
-                <ConnectButton 
-                  showBalance={false} 
-                  accountStatus="address"
-                />
-              </div>
+              <LobsterConnectButton size="lg" text="CONNECT WALLET" />
             )}
           </div>
 
@@ -473,12 +469,7 @@ export default function LobsterHome() {
               START YOUR OCEAN JOURNEY
             </Link>
           ) : (
-            <div className="lobster-wallet-btn-large">
-              <ConnectButton 
-                showBalance={false} 
-                accountStatus="address"
-              />
-            </div>
+            <LobsterConnectButton size="lg" text="DIVE INTO OCEAN" />
           )}
         </div>
       </section>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { CONTRACT_ADDRESSES, NFT_ABI } from '../wagmi';
 import LobsterIcon from '../components/LobsterIcon';
+import LobsterConnectButton from '../components/LobsterConnectButton';
 
 export default function Mint() {
   const { address, isConnected } = useAccount();
@@ -303,21 +304,25 @@ export default function Mint() {
                 />
               </div>
 
-              <button 
-                onClick={handleMint} 
-                disabled={!name || !isConnected || isConfirming || isMinting} 
-                className="lobster-btn lobster-btn-primary w-full"
-                style={{
-                  fontFamily: '"Montserrat", sans-serif',
-                  fontSize: '14px',
-                  padding: '18px 32px',
-                  fontWeight: '600',
-                  opacity: (!name || !isConnected) ? 0.5 : 1,
-                  cursor: (!name || !isConnected) ? 'not-allowed' : 'pointer'
-                }}
-              >
-                {isConfirming ? 'Confirming...' : isMinting ? 'Minting...' : isConnected ? '🦞 MINT NFT' : 'Connect Wallet First'}
-              </button>
+              {isConnected ? (
+                <button 
+                  onClick={handleMint} 
+                  disabled={!name || isConfirming || isMinting} 
+                  className="lobster-btn lobster-btn-primary w-full"
+                  style={{
+                    fontFamily: '"Montserrat", sans-serif',
+                    fontSize: '14px',
+                    padding: '18px 32px',
+                    fontWeight: '600',
+                    opacity: !name ? 0.5 : 1,
+                    cursor: !name ? 'not-allowed' : 'pointer'
+                  }}
+                >
+                  {isConfirming ? 'Confirming...' : isMinting ? 'Minting...' : '🦞 MINT NFT'}
+                </button>
+              ) : (
+                <LobsterConnectButton size="lg" text="Connect Wallet First" />
+              )}
             </div>
           </div>
         </div>

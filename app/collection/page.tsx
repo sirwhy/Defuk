@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import Link from 'next/link';
 import LobsterIcon from '../components/LobsterIcon';
+import LobsterConnectButton from '../components/LobsterConnectButton';
 
 export default function Collection() {
   const { isConnected } = useAccount();

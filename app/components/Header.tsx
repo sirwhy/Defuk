@@ -6,6 +6,7 @@ import { useAccount } from 'wagmi';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { usePathname } from 'next/navigation';
 import LobsterIcon from './LobsterIcon';
+import LobsterConnectButton from './LobsterConnectButton';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -111,15 +112,12 @@ export default function Header() {
                   width: '8px',
                   height: '8px',
                   background: 'var(--ocean-teal)',
-                  borderRadius: 0,
+                  borderRadius: '0',
                   boxShadow: '0 0 10px var(--ocean-teal)'
                 }} />
               </div>
             ) : (
-              <ConnectButton 
-                showBalance={false}
-                accountStatus="address"
-              />
+              <LobsterConnectButton size="md" text="CONNECT" />
             )}
           </div>
 

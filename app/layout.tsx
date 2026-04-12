@@ -5,8 +5,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 export const metadata = {
-  title: 'NFTCreate - Mint & Trade NFTs',
-  description: 'Create, collect, and trade unique digital assets',
+  title: 'DEFUK - Ocean NFT Marketplace',
+  description: 'Fresh seafood-quality NFTs. Mint It Fresh, Trade Big Claws, Collect Bubbles.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
