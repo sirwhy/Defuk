@@ -1,7 +1,7 @@
 'use client';
 
-import PixelHome from './components/PixelHome';
+import LobsterHome from './components/LobsterHome';
 
 export default function Home() {
-  return <PixelHome />;
+  return <LobsterHome />;
 }

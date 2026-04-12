@@ -15,38 +15,42 @@
    ================================ */
 
 :root {
-  /* Retro Gaming Palette */
+  /* Lobster Ocean Colors - NEW THEME */
+  --lobster-red: #ff4500;
+  --lobster-orange: #ff6b35;
+  --lobster-pink: #ffb6c1;
+  --ocean-blue: #006994;
+  --ocean-teal: #40e0d0;
+  --ocean-foam: #f0f8ff;
+  --shell-gold: #ffd700;
+  --premium-gold: #d4af37;
+  --fresh-white: #f5f5f5;
+  
+  /* Deep Ocean Background */
+  --ocean-deep: #0a1929;
+  --ocean-mid: #0d2b47;
+  --ocean-light: #1a4a6e;
+  
+  /* Text Colors */
+  --ocean-white: #ffffff;
+  --ocean-foam-light: #e6f7ff;
+  --ocean-gray-muted: #8ab4cc;
+  
+  /* Old Variables (backward compatibility) */
   --pixel-black: #0d0d0d;
   --pixel-dark: #1a1a1a;
   --pixel-gray: #333333;
-  
-  /* Neon Game Colors */
-  --pixel-green: #39ff14;
-  --pixel-pink: #ff6ec7;
-  --pixel-cyan: #00ffff;
-  --pixel-yellow: #ffff00;
-  --pixel-red: #ff0040;
-  --pixel-purple: #9d4edd;
-  
-  /* Text Colors */
-  --pixel-white: #ffffff;
-  --pixel-gray-light: #e0e0e0;
-  --pixel-gray-muted: #888888;
-  
-  /* Old Variables (backward compatibility) */
-  --bg-dark: var(--pixel-black);
-  --bg-card: var(--pixel-dark);
-  --neon-green: var(--pixel-green);
-  --neon-pink: var(--pixel-pink);
-  --neon-cyan: var(--pixel-cyan);
-  --neon-yellow: var(--pixel-yellow);
-  --text-primary: var(--pixel-white);
-  --text-muted: var(--pixel-gray-muted);
-  --text-bright: var(--pixel-white);
+  --bg-dark: var(--ocean-deep);
+  --bg-card: var(--ocean-mid);
+  --neon-green: var(--ocean-teal);
+  --neon-pink: var(--lobster-orange);
+  --neon-cyan: var(--ocean-teal);
+  --text-primary: var(--ocean-white);
+  --text-muted: var(--ocean-gray-muted);
+  --text-bright: var(--ocean-white);
   
   /* Fonts */
-  --font-pixel: 'Press Start 2P', cursive;
-  --font-retro: 'VT323', monospace;
+  --font-lobster: 'Montserrat', sans-serif;
   --font-silkscreen: 'Silkscreen', cursive;
 }
 
@@ -347,7 +351,154 @@ a {
 }
 
 /* ================================
-   Utility Classes
+   Lobster Theme Utilities
+   ================================ */
+
+/* Lobster Buttons */
+.lobster-btn {
+  font-family: 'Montserrat', sans-serif;
+  padding: 16px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.lobster-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.lobster-btn:hover::before {
+  left: 100%;
+}
+
+.lobster-btn-primary {
+  background: linear-gradient(135deg, var(--lobster-red) 0%, var(--lobster-orange) 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(255, 69, 0, 0.4);
+}
+
+.lobster-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 69, 0, 0.6);
+}
+
+.lobster-btn-secondary {
+  background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--ocean-teal) 100%);
+  color: white;
+  box-shadow: 0 8px 24px rgba(64, 224, 208, 0.4);
+}
+
+.lobster-btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(64, 224, 208, 0.6);
+}
+
+.lobster-btn-premium {
+  background: linear-gradient(135deg, var(--shell-gold) 0%, var(--premium-gold) 100%);
+  color: var(--ocean-deep);
+  box-shadow: 0 8px 24px rgba(255, 215, 0, 0.4);
+}
+
+.lobster-btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 215, 0, 0.6);
+}
+
+.lobster-nav-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  padding: 10px 20px;
+  background: rgba(64, 224, 208, 0.1);
+  border: 2px solid var(--ocean-teal);
+  color: var(--ocean-teal);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.lobster-nav-btn:hover {
+  background: var(--ocean-teal);
+  color: var(--ocean-deep);
+  box-shadow: 0 0 20px rgba(64, 224, 208, 0.4);
+}
+
+.lobster-cta-btn {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--lobster-red), var(--lobster-orange));
+  border: 3px solid transparent;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: all 0.3s;
+  box-shadow: 0 8px 24px rgba(255, 69, 0, 0.4);
+}
+
+.lobster-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(255, 69, 0, 0.6);
+  border-color: var(--shell-gold);
+}
+
+/* Lobster Cards */
+.lobster-card {
+  background: rgba(26, 74, 110, 0.5);
+  backdrop-filter: blur(10px);
+  border: 4px solid var(--ocean-teal);
+  padding: 32px;
+  border-radius: 16px;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.lobster-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4), 0 0 60px rgba(64, 224, 208, 0.3);
+  border-color: var(--lobster-orange);
+}
+
+/* Ocean Stats */
+.ocean-stat {
+  text-align: center;
+  padding: 24px 32px;
+  background: rgba(64, 224, 208, 0.1);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--ocean-teal);
+}
+
+.stat-number {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+/* ================================
+   Old Utility Classes (kept)
    ================================ */
 
 .text-center {
@@ -372,3 +523,4 @@ a {
 .gap-4 { gap: 1rem; }
 .gap-6 { gap: 1.5rem; }
 .gap-8 { gap: 2rem; }
+
