@@ -1018,6 +1018,44 @@ a {
 }
 
 /* ================================
+   Water Splash Effects
+   ================================ */
+
+@keyframes water-splash {
+  0% {
+    transform: translate(0, 0) scale(1.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes water-splash-small {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) scale(0);
+    opacity: 0;
+  }
+}
+
+.particle-water {
+  position: absolute;
+  pointer-events: none;
+  animation: water-splash 0.5s ease-out forwards;
+}
+
+.particle-water-small {
+  position: absolute;
+  pointer-events: none;
+  animation: water-splash-small 0.5s ease-out forwards;
+}
+
+/* ================================
    Lobster Title
    ================================ */
 

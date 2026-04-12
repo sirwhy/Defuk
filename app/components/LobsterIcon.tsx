@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface LobsterIconProps {
   type: 'lobster' | 'crayfish' | 'claw' | 'shell' | 'bubble' | 'ocean' | 'fresh' | 'premium';
@@ -9,6 +9,18 @@ interface LobsterIconProps {
   className?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
+  showParticles?: boolean;
+}
+
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  tx: string;
+  ty: string;
+  delay: number;
+  size: string;
+  color: string;
 }
 
 /**
@@ -20,9 +32,14 @@ export default function LobsterIcon({
   size = 'md',
   animation = 'float',
   className = '',
-  onClick
+  onClick,
+  showParticles = true,
+  style
 }: LobsterIconProps) {
   const [frame, setFrame] = useState(0);
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const iconRef = useRef<HTMLDivElement>(null);
+  const particleIdRef = useRef(0);
 
   // Animation frames loop
   useEffect(() => {
@@ -33,6 +50,65 @@ export default function LobsterIcon({
       return () => clearInterval(interval);
     }
   }, [animation]);
+
+  // Handle click to create water splash
+  const handleClick = (e: React.MouseEvent) => {
+    // Call parent onClick if provided
+    if (onClick) onClick();
+
+    if (!showParticles) return;
+
+    // Get icon position
+    const iconRect = iconRef.current?.getBoundingClientRect();
+    if (!iconRect) return;
+
+    const centerX = iconRect.left + iconRect.width / 2;
+    const centerY = iconRect.top + iconRect.height / 2;
+
+    // Get cursor position
+    const cursorX = e.clientX;
+    const cursorY = e.clientY;
+
+    // Calculate distance and angle
+    const dx = cursorX - centerX;
+    const dy = cursorY - centerY;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    // Normalize and add some randomness for splash effect
+    const angle = Math.atan2(dy, dx);
+    const spread = (Math.random() - 0.5) * 0.5; // +/- 0.25 rad spread
+    const finalAngle = angle + spread;
+
+    // Create 8-12 particles
+    const particleCount = 8 + Math.floor(Math.random() * 5);
+    const newParticles: Particle[] = [];
+    const colors = ['#006994', '#40e0d0', '#f0f8ff', '#40e0d0', '#006994'];
+    const sizes = ['4px', '6px', '8px'];
+
+    for (let i = 0; i < particleCount; i++) {
+      const particleDistance = distance * (0.8 + Math.random() * 0.4); // 80-120% of cursor distance
+      const tx = Math.cos(finalAngle + (Math.random() - 0.5) * 0.3) * particleDistance;
+      const ty = Math.sin(finalAngle + (Math.random() - 0.5) * 0.3) * particleDistance;
+      
+      newParticles.push({
+        id: particleIdRef.current++,
+        x: centerX,
+        y: centerY,
+        tx: `${tx.toFixed(2)}px`,
+        ty: `${ty.toFixed(2)}px`,
+        delay: Math.random() * 0.1,
+        size: sizes[Math.floor(Math.random() * sizes.length)],
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+
+    setParticles(prev => [...prev, ...newParticles]);
+
+    // Clean up particles after animation
+    setTimeout(() => {
+      setParticles(prev => prev.filter(p => !newParticles.includes(p)));
+    }, 500);
+  };
 
   // Size mapping
   const sizeClasses = {
@@ -70,12 +146,32 @@ export default function LobsterIcon({
 
   return (
     <div
-      className={`relative inline-block ${getAnimationClass()} ${className}`}
-      onClick={onClick}
+      ref={iconRef}
+      className={`relative inline-block cursor-pointer ${getAnimationClass()} ${className}`}
+      onClick={handleClick}
+      style={style}
     >
       <div className={`${sizeClasses[size]} relative flex items-center justify-center`}>
         {getLobsterSVG(type, frame)}
       </div>
+
+      {/* Render particles */}
+      {particles.map(particle => (
+        <div
+          key={particle.id}
+          className="particle-water"
+          style={{
+            left: particle.x,
+            top: particle.y,
+            width: particle.size,
+            height: particle.size,
+            background: particle.color,
+            '--tx': particle.tx,
+            '--ty': particle.ty,
+            animationDelay: `${particle.delay}s`
+          } as React.CSSProperties}
+        />
+      ))}
     </div>
   );
 }
