@@ -53,10 +53,20 @@ export default function LobsterIcon({
 
   // Handle click to create water splash
   const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     // Call parent onClick if provided
     if (onClick) onClick();
 
     if (!showParticles) return;
+
+    console.log('🦞 LobsterIcon clicked!', {
+      centerX,
+      centerY,
+      cursorX: e.clientX,
+      cursorY: e.clientY
+    });
 
     // Get icon position
     const iconRect = iconRef.current?.getBoundingClientRect();
@@ -85,6 +95,8 @@ export default function LobsterIcon({
     const colors = ['#006994', '#40e0d0', '#f0f8ff', '#40e0d0', '#006994'];
     const sizes = ['4px', '6px', '8px'];
 
+    console.log(`🌊 Creating ${particleCount} particles`);
+
     for (let i = 0; i < particleCount; i++) {
       const particleDistance = distance * (0.8 + Math.random() * 0.4); // 80-120% of cursor distance
       const tx = Math.cos(finalAngle + (Math.random() - 0.5) * 0.3) * particleDistance;
@@ -102,11 +114,13 @@ export default function LobsterIcon({
       });
     }
 
+    console.log('✨ Particles created, updating state');
     setParticles(prev => [...prev, ...newParticles]);
 
     // Clean up particles after animation
     setTimeout(() => {
       setParticles(prev => prev.filter(p => !newParticles.includes(p)));
+      console.log('🧹 Particles cleaned up');
     }, 500);
   };
 

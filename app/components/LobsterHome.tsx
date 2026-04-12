@@ -377,6 +377,7 @@ export default function LobsterHome() {
                   animation={feature.iconAnimation}
                   style={{ filter: `drop-shadow(0 0 20px ${feature.primaryColor}60)` }}
                   className="mx-auto"
+                  onClick={() => console.log(`Clicked ${feature.title} icon`)}
                 />
 
                 <h3 style={{
