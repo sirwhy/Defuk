@@ -942,6 +942,81 @@ a {
   transform: translate(-2px, -2px) !important;
 }
 
+/* Global ConnectButton styling for Pixel Lobster theme */
+.rcv__ConnectButton__connectButton {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  border-radius: 0 !important;
+  border: 4px solid transparent !important;
+  transition: all 0.1s !important;
+}
+
+/* Default ConnectButton - should be styled as lobster button */
+.rcv__ConnectButton__connectButton:not(.rcv__ConnectButton__connectButton_disabled):not(.rcv__ConnectButton__connectButton_loading) {
+  background: #ff4500 !important;
+  border-color: #cc3700 !important;
+  color: white !important;
+  box-shadow: 4px 4px 0px #cc3700 !important;
+}
+
+.rcv__ConnectButton__connectButton:not(.rcv__ConnectButton__connectButton_disabled):not(.rcv__ConnectButton__connectButton_loading):hover {
+  background: #ff6b35 !important;
+  box-shadow: 6px 6px 0px #cc3700 !important;
+  transform: translate(-2px, -2px) !important;
+}
+
+.rcv__ConnectButton__connectButton:not(.rcv__ConnectButton__connectButton_disabled):not(.rcv__ConnectButton__connectButton_loading):active {
+  transform: translate(2px, 2px) !important;
+  box-shadow: 2px 2px 0px #cc3700 !important;
+}
+
+/* ConnectButton with display block wrapper */
+.lobster-wallet-btn .rcv__ConnectButton__connectButton {
+  padding: 16px 32px !important;
+}
+
+/* Header ConnectButton */
+.rcv__ConnectButton__display {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+/* Address display */
+.rcv__ConnectButton__account__address {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+}
+
+/* Dropdown buttons */
+.rcv__ConnectButton__dropdownButton {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+  letter-spacing: 1px !important;
+  border-radius: 0 !important;
+  border: 2px solid !important;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.rcv__ConnectButton__dropdownButton:hover {
+  transform: translate(-1px, -1px) !important;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.rcv__ConnectButton__dropdownButton:active {
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Account info modal */
+.rcv__ConnectButton__account__info {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 /* ================================
    Lobster Title
    ================================ */
