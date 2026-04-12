@@ -129,9 +129,10 @@ export default function LobsterHome() {
                       backgroundSize: '200% 200%',
                       WebkitBackgroundClip: 'text',
                       WebkitTextFillColor: 'transparent',
-                      animation: 'ocean-flow 8s ease infinite'
+                      animation: 'ocean-flow 8s ease infinite',
+                      textShadow: '4px 4px 0 rgba(0,0,0,0.3)'
                     }}>
-                DE<span style={{ color: 'var(--lobster-orange)' }}>FUK</span>
+                DE<span style={{ color: 'var(--lobster-orange)' }}>FUK</span> 🦞
               </span>
               <span className="text-sm font-light tracking-widest"
                     style={{ 
