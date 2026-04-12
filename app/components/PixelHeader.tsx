@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useAccount } from 'wagmi';
-import PixelEmoticon from './components/PixelEmoticon';
+import PixelEmoticon from './PixelEmoticon';
 
 // Retro gaming features
 const features = [
