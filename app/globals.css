@@ -1,0 +1,374 @@
+/**
+ * Pixel Game Theme - Main CSS
+ * Retro 8-bit game aesthetics
+ * Powered by Tailwind CSS configuration
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Silkscreen:wght@400;700&display=swap');
+
+/* ================================
+   Base Variables
+   ================================ */
+
+:root {
+  /* Retro Gaming Palette */
+  --pixel-black: #0d0d0d;
+  --pixel-dark: #1a1a1a;
+  --pixel-gray: #333333;
+  
+  /* Neon Game Colors */
+  --pixel-green: #39ff14;
+  --pixel-pink: #ff6ec7;
+  --pixel-cyan: #00ffff;
+  --pixel-yellow: #ffff00;
+  --pixel-red: #ff0040;
+  --pixel-purple: #9d4edd;
+  
+  /* Text Colors */
+  --pixel-white: #ffffff;
+  --pixel-gray-light: #e0e0e0;
+  --pixel-gray-muted: #888888;
+  
+  /* Old Variables (backward compatibility) */
+  --bg-dark: var(--pixel-black);
+  --bg-card: var(--pixel-dark);
+  --neon-green: var(--pixel-green);
+  --neon-pink: var(--pixel-pink);
+  --neon-cyan: var(--pixel-cyan);
+  --neon-yellow: var(--pixel-yellow);
+  --text-primary: var(--pixel-white);
+  --text-muted: var(--pixel-gray-muted);
+  --text-bright: var(--pixel-white);
+  
+  /* Fonts */
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-retro: 'VT323', monospace;
+  --font-silkscreen: 'Silkscreen', cursive;
+}
+
+/* ================================
+   Base Styles
+   ================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'VT323', monospace;
+  background: var(--pixel-black);
+  color: var(--pixel-white);
+  font-size: 20px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+/* ================================
+   CRT Scanline Effect
+   ================================ */
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.1),
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+/* CRT Scanline Animation - Using Tailwind */
+.pixel-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(57, 255, 20, 0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9998;
+  animation: scanline 8s linear infinite;
+}
+
+/* ================================
+   Retro Background Grid
+   ================================ */
+
+.pixel-grid {
+  position: relative;
+  background-image: 
+    linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: retro-grid-move 10s linear infinite;
+}
+
+/* ================================
+   Container
+   ================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ================================
+   Pixel Buttons
+   ================================ */
+
+.pixel-btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 10px;
+  padding: 16px 24px;
+  background: var(--pixel-dark);
+  border: 4px solid var(--pixel-green);
+  color: var(--pixel-green);
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.1s;
+  box-shadow: 
+    4px 4px 0 var(--pixel-black),
+    -2px -2px 0 var(--pixel-pink);
+}
+
+.pixel-btn:hover {
+  background: var(--pixel-green);
+  color: var(--pixel-black);
+  transform: translate(2px, 2px);
+  box-shadow: 
+    2px 2px 0 var(--pixel-black),
+    -4px -4px 0 var(--pixel-pink);
+}
+
+.pixel-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.pixel-btn-primary {
+  background: var(--pixel-green);
+  color: var(--pixel-black);
+  border-color: var(--pixel-green);
+}
+
+.pixel-btn-secondary {
+  background: var(--pixel-pink);
+  color: var(--pixel-black);
+  border-color: var(--pixel-pink);
+}
+
+.pixel-btn-outline {
+  background: transparent;
+  color: var(--pixel-green);
+  border: 4px solid var(--pixel-green);
+}
+
+/* ================================
+   Pixel Cards
+   ================================ */
+
+.pixel-card {
+  background: var(--pixel-dark);
+  border: 4px solid var(--pixel-gray);
+  padding: 24px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.pixel-card::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-green);
+  border: 4px solid var(--pixel-black);
+}
+
+.pixel-card::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: var(--pixel-pink);
+  border: 4px solid var(--pixel-black);
+}
+
+.pixel-card:hover {
+  border-color: var(--pixel-green);
+  transform: translateY(-4px);
+  box-shadow: 
+    8px 8px 0 var(--pixel-black),
+    0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+/* ================================
+   Grid Layout
+   ================================ */
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+/* ================================
+   Pixel Text Effects
+   ================================ */
+
+.pixel-title {
+  font-family: 'Silkscreen', cursive;
+  font-size: clamp(32px, 8vw, 72px);
+  color: var(--pixel-white);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 
+    4px 4px 0 var(--pixel-black),
+    0 0 20px var(--pixel-green);
+}
+
+.pixel-heading {
+  font-family: 'Silkscreen', cursive;
+  font-size: 24px;
+  color: var(--pixel-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.pixel-subtitle {
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  color: var(--pixel-gray-muted);
+  line-height: 1.4;
+}
+
+/* Neon Text */
+.pixel-neon-green,
+.neon-green {
+  color: var(--pixel-green);
+  text-shadow: 0 0 10px var(--pixel-green), 0 0 20px var(--pixel-green);
+}
+
+.pixel-neon-pink,
+.neon-pink {
+  color: var(--pixel-pink);
+  text-shadow: 0 0 10px var(--pixel-pink), 0 0 20px var(--pixel-pink);
+}
+
+.pixel-neon-cyan {
+  color: var(--pixel-cyan);
+  text-shadow: 0 0 10px var(--pixel-cyan), 0 0 20px var(--pixel-cyan);
+}
+
+.pixel-neon-yellow {
+  color: var(--pixel-yellow);
+  text-shadow: 0 0 10px var(--pixel-yellow), 0 0 20px var(--pixel-yellow);
+}
+
+/* ================================
+   Stat Pixel
+   ================================ */
+
+.stat-pixel {
+  font-family: 'VT323', monospace;
+  font-size: 32px;
+  color: var(--pixel-green);
+  text-shadow: 0 0 5px var(--pixel-green);
+}
+
+/* ================================
+   Glass Effect
+   ================================ */
+
+.glass-card {
+  background: rgba(26, 26, 26, 0.7);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+}
+
+/* ================================
+   Link Styles
+   ================================ */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ================================
+   Scrollbar
+   ================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--pixel-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--pixel-green);
+  border: 2px solid var(--pixel-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--pixel-pink);
+}
+
+/* ================================
+   Utility Classes
+   ================================ */
+
+.text-center {
+  text-align: center;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mb-4 { margin-bottom: 1rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mb-12 { margin-bottom: 3rem; }
+.mb-16 { margin-bottom: 4rem; }
+
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
+
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+.gap-8 { gap: 2rem; }
