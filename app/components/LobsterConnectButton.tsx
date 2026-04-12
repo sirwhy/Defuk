@@ -89,7 +89,9 @@ export default function LobsterConnectButton({
                     background: '#40e0d0',
                     borderRadius: '0'
                   }} />
-                  {account.addressSlice ? `${account.addressSlice.slice(0, 4)}...${account.addressSlice.slice(-4)}` : 'CONNECTED'}
+                  {account.address
+                    ? `${account.address.slice(0, 4)}...${account.address.slice(-4)}`
+                    : 'CONNECTED'}
                 </span>
               ) : (
                 <span>{text}</span>
