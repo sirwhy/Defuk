@@ -14,8 +14,6 @@ module.exports = {
         sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
         pixel: ['Press Start 2P', 'monospace'],
-        /* Old pixel fonts (kept for backward compatibility) */
-        pixel: ['Press Start 2P', 'cursive'],
         retro: ['VT323', 'monospace'],
         silkscreen: ['Silkscreen', 'cursive'],
         lobster: ['Montserrat', 'sans-serif'],
