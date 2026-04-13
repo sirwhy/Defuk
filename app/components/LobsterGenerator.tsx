@@ -145,8 +145,7 @@ export default function LobsterGenerator({
         pixels[pixels.length - 1] = { 
           x: Math.round(centerX + 4 * scale), 
           y: Math.round(antennaYStart - i), 
-          color: '#000000',
-          opacity: 0.8
+          color: '#000000'
         };
       }
     }
@@ -184,7 +183,7 @@ export default function LobsterGenerator({
           
           // Belly plates
           if (segment % 2 === 0 && y === segmentY + segmentHeight - 1 && x % 2 === 0) {
-            pixels[pixels.length - 1] = { x: Math.round(x * 1), y: Math.round(y * 1), color: colors.lobsterOrange, opacity: 0.4 };
+            pixels[pixels.length - 1] = { x: Math.round(x * 1), y: Math.round(y * 1), color: colors.lobsterOrange };
           }
         }
       }
@@ -208,7 +207,7 @@ export default function LobsterGenerator({
         });
         // Inner detail
         if (dx > 1 && dx < clawSize - 1 && dy > 1 && dy < clawSize - 1) {
-          pixels[pixels.length - 1] = { x: leftClawX + dx, y: clawY + dy, color: colors.clawPink, opacity: 0.7 };
+          pixels[pixels.length - 1] = { x: leftClawX + dx, y: clawY + dy, color: colors.clawPink };
         }
       }
     }
@@ -234,7 +233,7 @@ export default function LobsterGenerator({
           color: colors.clawPink 
         });
         if (dx > 1 && dx < clawSize - 1 && dy > 1 && dy < clawSize - 1) {
-          pixels[pixels.length - 1] = { x: rightClawX + dx, y: clawY + dy, color: colors.clawPink, opacity: 0.7 };
+          pixels[pixels.length - 1] = { x: rightClawX + dx, y: clawY + dy, color: colors.clawPink };
         }
       }
     }
