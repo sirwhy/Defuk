@@ -129,8 +129,7 @@ export default function LobsterGenerator({
         pixels[pixels.length - 1] = { 
           x: Math.round(centerX - 4 * scale), 
           y: Math.round(antennaYStart - i), 
-          color: '#000000',
-          opacity: 0.8
+          color: '#000000'
         };
       }
     }
