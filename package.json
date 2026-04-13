@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@langchain/community": "^1.1.27",
     "@langchain/openai": "^1.4.4",
     "@rainbow-me/rainbowkit": "^2.0.0",
     "@react-native-async-storage/async-storage": "^1.21.0",
