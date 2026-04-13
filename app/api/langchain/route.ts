@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { chatWithNFTAssistant, generateNFTEsc NFTDescription, suggestNFTPrice } from "@/app/lib/langchain-nft-assistant";
+import { chatWithNFTAssistant, generateNFTDescription, suggestNFTPrice } from "@/app/lib/langchain-nft-assistant";
 
 export async function POST(request: NextRequest) {
   try {

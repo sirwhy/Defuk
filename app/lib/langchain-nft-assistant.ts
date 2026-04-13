@@ -163,7 +163,7 @@ Always provide helpful, accurate, and engaging responses!`,
 }
 
 // NFT Description Generator
-export async function generateNFTEsc NFTDescription(nftData: {
+export async function generateNFTDescription(nftData: {
   name: string;
   type: string;
   rarity: string;
