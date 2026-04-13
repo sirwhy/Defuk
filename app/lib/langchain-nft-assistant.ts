@@ -277,7 +277,7 @@ What should collectors know? What's good for trading?`,
 export default {
   createNFTAssistant,
   chatWithNFTAssistant,
-  generateNFTEsc NFTDescription,
+  generateNFTDescription,
   suggestNFTPrice,
   analyzeMarketTrends,
 };
