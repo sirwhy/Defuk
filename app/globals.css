@@ -1,0 +1,706 @@
+/**
+ * FarmCats Theme - Modern Clean Design
+ * Inspired by market.farmcats.app
+ * Sophisticated dark theme with gold accents
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Press+Start+2P&display=swap');
+
+/* ================================
+   FarmCats Design System
+   ================================ */
+
+:root {
+  /* Dark Background - Premium Feel */
+  --bg: #0a0a09;
+  --bg1: #111110;
+  --bg2: #191918;
+  --bg3: #222221;
+  
+  /* Borders & Lines */
+  --line: #2a2a28;
+  --line2: #383835;
+  
+  /* Text Colors */
+  --txt: #eeede8;
+  --txt2: #a8a89e;
+  --txt3: #6b6b63;
+  
+  /* Accent Colors */
+  --gold: #ffbe0e;
+  --cream: #f5f0e8;
+  --green: #5cb87a;
+  --red: #d95b5b;
+  --blue: #6b9fd4;
+  
+  /* Fonts */
+  --fserif: 'EB Garamond', Georgia, serif;
+  --fsans: 'Inter', system-ui, sans-serif;
+  --fmono: 'JetBrains Mono', monospace;
+  --fpixel: 'Press Start 2P', monospace;
+  
+  /* Border Radius */
+  --r: 12px;
+  --rs: 8px;
+  
+  /* Animation Easing */
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+/* ================================
+   Base Styles
+   ================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: var(--fsans);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Emphasized Text (Pixel Style) */
+em {
+  font-style: normal;
+  font-family: var(--fpixel);
+  color: var(--gold);
+  font-size: .56em;
+  vertical-align: middle;
+  letter-spacing: .04em;
+}
+
+/* ================================
+   Animations
+   ================================ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+/* ================================
+   Navigation
+   ================================ */
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10, 10, 9, .92);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--line);
+  height: 58px;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-logo-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.nav-logo-name {
+  font-family: var(--fpixel);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  padding: 6px 13px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gold);
+  text-decoration: none;
+  transition: color .12s, background .12s;
+}
+
+.nav-link:hover {
+  color: var(--gold);
+  background: var(--bg2);
+}
+
+.nav-link.active {
+  color: var(--gold);
+  background: var(--bg2);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.tempo-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 11px;
+  border-radius: 20px;
+  border: 1px solid var(--line2);
+  background: var(--bg1);
+  font-size: 11px;
+  font-family: var(--fmono);
+  color: var(--green);
+}
+
+.tempo-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2.4s ease infinite;
+}
+
+.nav-icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  border: 1px solid var(--gold);
+  background: var(--bg1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .12s, background .12s;
+  padding: 0;
+}
+
+.nav-icon-btn:hover {
+  color: var(--gold);
+  background: var(--bg2);
+}
+
+.nav-burger {
+  flex-direction: column;
+  gap: 4px;
+}
+
+.burger-line {
+  width: 14px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--txt2);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: var(--bg1);
+  transition: all .12s;
+}
+
+.back-link:hover {
+  color: var(--txt);
+  border-color: var(--line2);
+}
+
+/* ================================
+   Buttons
+   ================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-family: var(--fsans);
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  transition: all .12s;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: .38;
+  cursor: not-allowed;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(.98);
+}
+
+.btn-primary {
+  background: var(--cream);
+  color: #0a0a09;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #fff;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #0a0a09;
+  font-weight: 600;
+}
+
+.btn-gold:hover:not(:disabled) {
+  background: #d4b47a;
+}
+
+.btn-ghost {
+  background: var(--bg2);
+  color: var(--txt2);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg3);
+  color: var(--txt);
+}
+
+.btn-danger {
+  background: rgba(217, 91, 91, .1);
+  border: 1px solid rgba(217, 91, 91, .25);
+  color: var(--red);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: rgba(217, 91, 91, .18);
+}
+
+.btn-out {
+  background: transparent;
+  border: 1px solid var(--line2);
+  color: var(--txt2);
+}
+
+.btn-out:hover:not(:disabled) {
+  border-color: var(--txt2);
+  color: var(--txt);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+
+.btn-lg {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+.w-full {
+  width: 100%;
+}
+
+/* ================================
+   Layout
+   ================================ */
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.page-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  animation: fadeUp .3s var(--ease);
+}
+
+/* ================================
+   Alerts
+   ================================ */
+
+.alert {
+  border-radius: var(--rs);
+  padding: 11px 14px;
+  font-size: 13px;
+  border: 1px solid;
+}
+
+.al-info {
+  background: rgba(107, 159, 212, .07);
+  border-color: rgba(107, 159, 212, .2);
+  color: var(--blue);
+}
+
+.al-warn {
+  background: rgba(200, 169, 110, .07);
+  border-color: rgba(200, 169, 110, .2);
+  color: var(--gold);
+}
+
+.al-ok {
+  background: rgba(92, 184, 122, .07);
+  border-color: rgba(92, 184, 122, .2);
+  color: var(--green);
+}
+
+.al-err {
+  background: rgba(217, 91, 91, .07);
+  border-color: rgba(217, 91, 91, .2);
+  color: var(--red);
+}
+
+/* ================================
+   Market Stats
+   ================================ */
+
+.market-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.stat-cell {
+  background: var(--bg1);
+  padding: 16px 18px;
+  transition: background .15s;
+}
+
+.stat-cell:hover {
+  background: var(--bg2);
+}
+
+.stat-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--txt3);
+  margin-bottom: 5px;
+}
+
+.stat-val {
+  font-family: var(--fmono);
+  font-size: 20px;
+  color: var(--txt);
+}
+
+.stat-val.gold {
+  color: var(--gold);
+}
+
+.stat-val.green {
+  color: var(--green);
+}
+
+.stat-val.blue {
+  color: var(--blue);
+}
+
+.stat-sub {
+  font-size: 11px;
+  color: var(--txt3);
+  margin-top: 3px;
+}
+
+/* ================================
+   Tabs
+   ================================ */
+
+.tabs-row {
+  display: flex;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 11px 16px;
+  background: var(--bg1);
+  border: none;
+  color: var(--txt3);
+  font-family: var(--fsans);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .12s;
+  text-align: center;
+}
+
+.tab-btn:hover {
+  color: var(--txt2);
+  background: var(--bg2);
+}
+
+.tab-btn.act {
+  background: var(--bg2);
+  color: var(--txt);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.act {
+  display: block;
+}
+
+/* ================================
+   NFT Cards
+   ================================ */
+
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.nft-card {
+  background: var(--bg1);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  overflow: hidden;
+  transition: border-color .15s, transform .15s;
+  position: relative;
+  cursor: pointer;
+}
+
+.nft-card:hover {
+  border-color: var(--line2);
+  transform: translateY(-2px);
+}
+
+.nft-card.stale {
+  opacity: .78;
+}
+
+.nft-img {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg2);
+  display: block;
+  object-fit: cover;
+}
+
+.nft-img-ph {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft-img-ph svg {
+  opacity: .18;
+}
+
+.nft-body {
+  padding: 10px 12px;
+}
+
+.nft-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--txt);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nft-price {
+  font-family: var(--fmono);
+  font-size: 13px;
+  color: var(--gold);
+  margin-top: 2px;
+}
+
+.nft-seller {
+  font-size: 10px;
+  color: var(--txt3);
+  margin-top: 2px;
+  font-family: var(--fmono);
+}
+
+.nft-actions {
+  padding: 0 12px 12px;
+  display: flex;
+  gap: 6px;
+}
+
+/* ================================
+   My NFT List
+   ================================ */
+
+.my-nft-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.my-nft-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg1);
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  transition: border-color .15s;
+}
+
+.my-nft-row:hover {
+  border-color: var(--line2);
+}
+
+.my-nft-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: var(--bg2);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.my-nft-img img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.my-nft-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.my-nft-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ================================
+   Link Styles
+   ================================ */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ================================
+   Scrollbar
+   ================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--line2);
+}
+
+/* ================================
+   Lobster Brand Integration
+   ================================ */
+
+/* Use FarmCats base but add Lobster accents */
+.brand-gold {
+  color: var(--gold);
+}
+
+.brand-cream {
+  color: var(--cream);
+}
+
+.lobster-accent {
+  color: #ff4500;
+}
+
+.farmcats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
