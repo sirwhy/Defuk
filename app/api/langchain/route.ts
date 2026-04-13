@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-        const description = await generateNFTEsc NFTDescription(body.nftData);
+        const description = await generateNFTDescription(body.nftData);
         return NextResponse.json({ 
           success: true, 
           description 
