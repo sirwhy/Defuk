@@ -1,6 +1,6 @@
 import '@rainbow-me/rainbowkit/styles.css';
 import './globals.css';
-import { Inter, EB_Garamond, JetBrains_Mono, Press_Start_2P } from 'next/font/google';
+import { Inter, EB_Garamond, JetBrains_Mono } from 'next/font/google';
 import Providers from './providers';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -21,11 +21,6 @@ const ebGaramond = EB_Garamond({
 const jetBrainsMono = JetBrains_Mono({ 
   subsets: ['latin'],
   variable: '--font-farm-mono',
-});
-
-const pressStart2P = Press_Start_2P({ 
-  subsets: ['latin'],
-  weight: 400,
 });
 
 export const metadata = {
