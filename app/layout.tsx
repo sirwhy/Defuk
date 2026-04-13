@@ -25,6 +25,7 @@ const jetBrainsMono = JetBrains_Mono({
 
 const pressStart2P = Press_Start_2P({ 
   subsets: ['latin'],
+  weight: 400,
 });
 
 export const metadata = {
