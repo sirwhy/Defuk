@@ -15,7 +15,7 @@ const inter = Inter({
 const ebGaramond = EB_Garamond({ 
   subsets: ['latin'],
   variable: '--font-farm-serif',
-  weight: ['400', '500', '600', 'italic'],
+  weight: ['400', '500', '600', '700', '800'],
 });
 
 const jetBrainsMono = JetBrains_Mono({ 
@@ -25,7 +25,6 @@ const jetBrainsMono = JetBrains_Mono({
 
 const pressStart2P = Press_Start_2P({ 
   subsets: ['latin'],
-  variable: '--font-farm-pixel',
 });
 
 export const metadata = {
@@ -36,7 +35,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${ebGaramond.variable} ${jetBrainsMono.variable} ${pressStart2P.variable} font-sans`}>
+      <body className={`${inter.variable} ${ebGaramond.variable} ${jetBrainsMono.variable} font-sans`}>
         <Providers>
           <Header />
           <main>{children}</main>
