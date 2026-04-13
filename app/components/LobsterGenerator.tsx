@@ -16,7 +16,7 @@ interface LobsterConfig {
     clawPink: string;
     legBrown: string;
   };
-  showCoordinates: boolean;
+  showCoordinates?: boolean;
   className?: string;
 }
 
@@ -33,7 +33,8 @@ interface LobsterConfig {
 export default function LobsterGenerator({
   size = 'md',
   colors,
-  showCoordinates = false
+  showCoordinates = false,
+  className = ''
 }: LobsterConfig) {
   const [frame, setFrame] = useState(0);
   const [generatedPixels, setGeneratedPixels] = useState<PixelPoint[]>([]);
