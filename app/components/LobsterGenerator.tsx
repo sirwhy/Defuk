@@ -17,6 +17,7 @@ interface LobsterConfig {
     legBrown: string;
   };
   showCoordinates: boolean;
+  className?: string;
 }
 
 /**
@@ -352,7 +353,6 @@ export default function LobsterGenerator({
               width="1"
               height="1"
               fill={pixel.color}
-              opacity={pixel.opacity ?? 1}
             />
           ))}
         </svg>
