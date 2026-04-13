@@ -4,7 +4,7 @@ import { Inter, EB_Garamond, JetBrains_Mono, Press_Start_2P } from 'next/font/go
 import Providers from './providers';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import NFTAssistant from './components/NFTAssistant';
+
 
 // FarmCats fonts
 const inter = Inter({ 
@@ -40,7 +40,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <Header />
           <main>{children}</main>
-          <NFTAssistant />
           <Footer />
         </Providers>
       </body>
