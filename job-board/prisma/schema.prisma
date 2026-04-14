@@ -1,0 +1,136 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int      @id @default(autoincrement())
+  name          String?
+  email         String   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          Int      @default(1) @map("role")  // 1=JOB_SEEKER, 2=EMPLOYER, 3=ADMIN
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // For job seekers
+  profile       JobSeekerProfile?
+  applications  Application[]
+
+  // For employers
+  company       Company?
+
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model JobSeekerProfile {
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  user            User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position        String?
+  experience      String?
+  skills          String?  // Comma-separated string: "React,TypeScript,Node"
+  location        String?
+  salaryExpectation Int?
+  portfolioUrl    String?
+  cvUrl           String?
+}
+
+model Company {
+  id              Int    @id @default(autoincrement())
+  userId          Int    @unique
+  user            User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  website         String?
+  location        String?
+  industry        String?
+  size            String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  jobs            Job[]
+}
+
+model Job {
+  id              Int    @id @default(autoincrement())
+  companyId       Int
+  company         Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  title           String
+  description     String
+  location        String
+  salaryMin       Int?
+  salaryMax       Int?
+  type            Int      @default(1) @map("type")  // 1=FULL_TIME, 2=PART_TIME, 3=CONTRACT, 4=INTERN, 5=FREELANCE
+  experienceLevel String?
+  postedAt        DateTime @default(now())
+  expiresAt       DateTime?
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  applicationCount Int     @default(0) @map("application_count")
+  views           Int      @default(0) @map("views")
+
+  applications    Application[]
+
+  @@index([companyId])
+  @@index([isActive, postedAt])
+  @@index([location])
+}
+
+model Application {
+  id              Int    @id @default(autoincrement())
+  jobId           Int
+  job             Job      @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id])
+  coverLetter     String?
+  status          Int      @default(0) @map("status")  // 0=PENDING, 1=REVIEWING, 2=INTERVIEW, 3=OFFERED, 4=REJECTED, 5=HIRED
+  appliedAt       DateTime @default(now())
+  resumeUrl       String?
+  portfolioUrl    String?
+
+  @@index([jobId])
+  @@index([userId])
+  @@index([status])
+}
+
+model Account {
+  id                Int      @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
